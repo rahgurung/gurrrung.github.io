@@ -1,0 +1,87 @@
+/*making websites resposive*/
+@media (min-width: 500px) {
+
+  /* styling of container one */
+  .container_fluid {
+    background-color: #957BBE;
+    height: 610px;
+    padding-top: 50px;
+    animation-delay: -1s;
+  }
+
+  /*syling the container_fluid3 which has qualifications*/
+  .container_fluid2 {
+    background-color:#1ba94c ;
+    height:560px;
+    padding-top: 50px;
+  }
+
+  /*styling the container_fluid3 which has projects*/
+  .container_fluid3 {
+    background-color:#8e9299 ;
+    height:550px;
+    padding-top: 50px;
+  }
+
+  #head {
+    font-size: 70px;
+    font-family:'Parisienne', sans-serif;
+  }
+}
+
+@media (max-width: 499px) {
+
+  .container_fluid {
+    background-color: #957BBE;
+    height: 670px;
+    padding-top: 50px;
+  }
+
+  .container_fluid2 {
+    background-color:#1ba94c ;
+    height:560px;
+    padding-top: 50px;
+  }
+
+  .container_fluid3 {
+    background-color:#8e9299 ;
+    height:600px;
+    padding-top: 50px;
+  }
+
+  #head {
+    font-size: 35px;
+    font-family:'Parisienne', sans-serif;
+  }
+}
+
+/* styling the picture*/
+.photo {
+  align-items: center;
+  border: 3px solid black;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  border-radius: 5px;
+}
+
+/*styling font*/
+#naman{
+  font-family: 'Poppins';
+}
+/* styling the paragraph_one */
+#paragraph_one {
+  font-family: 'Muli' , sans-serif;
+  color: black ;
+}
+
+/*styling the qualifications School*/
+#school{
+  text-align: center;
+  font-family: 'Philosopher',sans-serif;
+}
+
+.qlfcs{
+  font-family:'Dosis', sans-serif;
+}

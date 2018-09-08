@@ -1,4 +1,5 @@
 /*making websites resposive*/
+/* for desktop */
 @media (min-width: 500px) {
 
   /* styling of container one */
@@ -19,7 +20,7 @@
   /*styling the container_fluid3 which has projects*/
   .container_fluid3 {
     background-color:#8e9299 ;
-    height:550px;
+    height:600px;
     padding-top: 50px;
   }
 
@@ -29,6 +30,7 @@
   }
 }
 
+/* for mobiles */
 @media (max-width: 499px) {
 
   .container_fluid {
@@ -45,7 +47,7 @@
 
   .container_fluid3 {
     background-color:#8e9299 ;
-    height:600px;
+    height:700px;
     padding-top: 50px;
   }
 

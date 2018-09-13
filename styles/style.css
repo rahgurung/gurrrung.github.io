@@ -1,89 +1,100 @@
-/*making websites resposive*/
-/* for desktop */
-@media (min-width: 500px) {
+/* styling the navbar */
+.navbar{ background:#2A2A2A;}
+.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
+.nav-link{ margin-right: 1em !important;}
+.nav-link:hover{ background: #f4f4f4; color: black; }
+.navbar-collapse{ justify-content: flex-end;}
+.navbar-toggler{  background:#fff !important;}
 
-  /* styling of container one */
-  .container_fluid {
-    background-color: #957BBE;
-    height: 610px;
-    padding-top: 50px;
-    animation-delay: -1s;
-  }
-
-  /*syling the container_fluid3 which has qualifications*/
-  .container_fluid2 {
-    background-color:#1ba94c ;
-    height:560px;
-    padding-top: 50px;
-  }
-
-  /*styling the container_fluid3 which has projects*/
-  .container_fluid3 {
-    background-color:#8e9299 ;
-    height:610px;
-    padding-top: 50px;
-  }
-
-  #head {
-    font-size: 70px;
-    font-family:'Parisienne', sans-serif;
-  }
+/*styling the header*/
+.header{
+	position: relative;
+	background-size: cover;
+	background-position: center;
 }
 
-/* for mobiles */
-@media (max-width: 499px) {
-
-  .container_fluid {
-    background-color: #957BBE;
-    height: 670px;
-    padding-top: 50px;
-  }
-
-  .container_fluid2 {
-    background-color:#1ba94c ;
-    height:560px;
-    padding-top: 50px;
-  }
-
-  .container_fluid3 {
-    background-color:#8e9299 ;
-    height:700px;
-    padding-top: 50px;
-  }
-
-  #head {
-    font-size: 35px;
-    font-family:'Parisienne', sans-serif;
-  }
+.overlay{
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+  left: 0;
+  top: 0;
+  background: #2A2A2A;
 }
 
-/* styling the picture*/
-.photo {
-  align-items: center;
-  border: 3px solid black;
+.description{
+  position: absolute;
+  top: 30%;
+  margin: auto;
+  padding: 2em;
+}
+
+.description h1{
+  color:#E4E4E4 ;
+}
+
+.description p{
+  color:#666;
+  font-size: 20px;
+  width: 50%;
+  line-height: 1.5;
+}
+
+.description button{
+  border:1px  solid #E4E4E4;
+  background:#E4E4E4;
+  color:#2A2A2A;
+}
+
+/* styling the about section*/
+.about{
+  color: #2A2A2A;
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.about h1{
+  color:#2A2A2A;
+  margin: 2em;
+}
+
+.about img{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%
+}
+
+.about span{
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 200px;
-  border-radius: 5px;
+  color: #2A2A2A;
+  position: absolute;
+  left: 115px;
 }
 
-/*styling font*/
-#naman{
-  font-family: 'Poppins';
-}
-/* styling the paragraph_one */
-#paragraph_one {
-  font-family: 'Muli' , sans-serif;
-  color: black ;
+.about .desc{
+  padding: 2em;
+  border-left:4px solid black;
 }
 
-/*styling the qualifications School*/
-#school{
-  text-align: center;
-  font-family: 'Philosopher',sans-serif;
+.about .desc h3{
+  color: #2A2A2A;
 }
 
-.qlfcs{
-  font-family:'Dosis', sans-serif;
+.about .desc p{
+  line-height:2;
+  color:#2A2A2A;
+}
+
+/* styling the projects section*/
+.project{
+  color: #2A2A2A;
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.project h1{
+  color:#2A2A2A;
+  margin: 2em;
 }

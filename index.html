@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Global site tag (gtag.js) - Google Analytics and scripts import -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72221639-2"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
@@ -9,65 +13,107 @@
         gtag('js', new Date());
         gtag('config', 'UA-72221639-2');
       </script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-      <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-      <!--   added bootstrap   -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+      <!--   my imports   -->
+      <script type="text/javascript" src='scripts/main.js'></script>
       <link rel="stylesheet" href="styles/style.css">
-
-      <!-- animations -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-
-      <!-- importing google fonts -->
-      <link href="https://fonts.googleapis.com/css?family=Dosis|Muli|Parisienne|Philosopher|Poppins" rel="stylesheet">
 
       <title>Rahul Gurung</title>
     </head>
     <body>
-
-      <!-- container one: Introduction and picture -->
-      <div class ="container_fluid">
-        <h1 id= "head" class= "animated fadeInDown" align = "center"><b>•Rahul Gurung•</b></h1><br>
-        <img class = "photo" align="middle" src="images/card_one.jpg" alt="RahulGurung"><br>
-        <h4 id="naman" class= "animated fadeIn" align="center">नमस्ते</h4>
-        <p align="center" class= "animated fadeIn" id= "paragraph_one">This is Rahul Gurung, currently studying in CGC College of Engineering.</p>
-        <p align="center" class= "animated fadeIn" id="paragraph_one">I am Open Source Enthuisist and love to build things.</p>
-        <div class="button" style="text-align:center">
-          <br>
-          <a class="btn btn-primary" href="mailto:gurungrahul2@gmail.com?Subject=Hello%20!" role="button">SAY! HI</a>
-        </div>
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand" href="#">Rahul Gurung</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-4">
+            <li class="nav-item">
+              <a class="nav-link" data-value="about" href="#">About</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link" data-value="projects" href="#">Projects</a>
+          </li>
+    <!--      <li class="nav-item">
+            <a class="nav-link " data-value="experience"href="#">Experience</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link " data-value="blog" href="#">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " data-value="contact" href="#">Contact</a>
+          </li>
+        </ul>
       </div>
+    </nav>
 
-      <!-- container two: Qualifications. -->
-      <div class = "container_fluid2">
-        <h1 id = "head" class= "animated fadeInDown" align = "center"><b> •Qualifications• </b> </h1><br>
-          <h1 id="school">School</h1>
-          <p class="qlfcs" align="center">S.Z.S.F.S Khalsa Senior Secondary School</p><br>
-          <h1 id="school">Senior School</h1>
-          <p class="qlfcs" align="center">Doaba Public School</p><br>
-          <h1 id="school">College</h1>
-          <p class="qlfcs" align="center">CGC College of Engineering</p>
-      </div>
-
-      <!-- container three: Projects that i work on. -->
-      <div class ="container_fluid3">
-        <h1 id="head" class= "animated fadeInDown" align = "center"><b> •Projects• </b></h1><br>
-        <h1 id="school">Coo: Open Source Chat App</h1><br>
-        <p class="qlfcs" align="center">In this project, I build an online messaging service<br>
-          using Flask, similar in spirit to Slack. Users will be able to sign into this site<br>
-          with a display name, create channels (i.e. chatrooms) to communicate in, as well as<br>
-          see and join existing channels. Once a channel is selected, users will be able to<br>
-          send and receive messages with one another in real time.</p>
-          <a href="https://github.com/gurungrahul2/coo"><p class ="qlfcs" align="center" style="color:black">Source Code</p></a>
-        <h1 id="school">Books: Books Reviews Website</h1><br>
-        <p class='qlfcs' align="center">Users are able to register for this website and then log<br>
-          in using their username and password. Once they login, they can review search, review books<br>
-          and I have also build a API to access JSON.<br>
-        </p><br>
+    <header class="header">
+      <div class="overlay"></div>
+        <div class="container">
+          <div class="description ">
+            <h1>Hello , This is Rahul Gurung.</h1>
+              <p>
+                I am student at CGC College of Engineering, Mohali and I am Open Source Enthuisist. I have contributed to LibreOffice.
+              </p>
+              <button class="btn btn-outline-secondary btn-lg">See more</button>
+            </h1>
+          </div>
         </div>
+
+    </header>
+
+    <!-- about section -->
+<div class="about" id="about">
+	<div class="container">
+	  <h1 class="text-center">About Me</h1>
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<img src="images/pic.jpg" class="img-fluid">
+			</div>
+			<div class="col-lg-8 col-md-8 col-sm-12 desc">
+				<h3><br>Rahul Gurung</h3>
+				<p>
+          I am currently a sophomore and I upload most of my work to Github. In my free time, I
+          try to design some dance moves too, and I regularly write posts about programming in my
+          blog. I have been greatly influenced by Open Source Culture and currently I am
+          contributing to LibreOffice and have converted various api based unit tests to cpp from
+          java.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Posts section -->
+<div class="project">
+ <div class="container">
+   <h1 class="text-center">Projects</h1>
+   <h3>Coo: Web Chat App <span class="badge badge-secondary">JavaScript</span> <a href="https://www.github.com/gurungrahul2/coo"
+     <button class="btn btn-outline-secondary btn-lg">Source Code</button>
+   </a></h3>
+   <p>
+     In this project, I build an online messaging service using Flask,<br>
+     similar in spirit to Slack. Users will be able to sign into this site<br>
+     with a display name, create channels (i.e. chatrooms) to communicate in, <br>
+     as well as see and join existing channels. Once a channel is selected, users<br>
+      will be able to send and receive messages with one another in real time.
+  </p>
+
+  <h3><br>Book Reviews Website <span class="badge badge-secondary">Python</span></h3>
+  <p>
+    Users are able to register for this website and then log in using their username<br>
+   and password. Once they login, they can review search, review books and I have also<br>
+    build a API to access JSON.
+ </p>
+  </div>
+</div>
+
+<!-- Blog section -->
 
     </body>
 </html>

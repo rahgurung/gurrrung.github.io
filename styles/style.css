@@ -99,7 +99,7 @@
   margin: 2em;
 }
 
-/* styling the projects section*/
+/* styling the blog section*/
 .blog {
   color: #2A2A2A;
   margin: 4em 0;
@@ -108,6 +108,19 @@
 }
 
 .blog h1{
+  color:#2A2A2A;
+  margin: 2em;
+}
+
+/* styling the contact section*/
+.contact {
+  color: #2A2A2A;
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+
+.contact h1{
   color:#2A2A2A;
   margin: 2em;
 }

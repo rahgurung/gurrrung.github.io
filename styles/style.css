@@ -1,88 +1,23 @@
 /* styling the navbar */
-.navbar{ background:#2A2A2A;}
-.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
-.nav-link{ margin-right: 1em !important;}
-.nav-link:hover{ background: #f4f4f4; color: black; }
-.navbar-collapse{ justify-content: flex-end;}
-.navbar-toggler{  background:#fff !important;}
-
-/*styling the header*/
-.header{
-	position: relative;
-	background-size: cover;
-	background-position: center;
+.display-intro{
+  font-family: 'Press Start 2P', cursive;
+  font-size: 45px;
+  text-align: center;
+  padding: 20px 0;
 }
 
-.overlay{
-  position: absolute;
-  min-height: 100%;
-  min-width: 100%;
-  left: 0;
-  top: 0;
-  background: #2A2A2A;
+.jumbotron {
+  margin-bottom: 0px;
+  background-color: #ffffff;
 }
 
-.description{
-  position: absolute;
-  top: 30%;
-  margin: auto;
-  padding: 2em;
+.jumbo-intro {
+ color:#000000;
+ background-color:#ffffff;
 }
 
-.description h1{
-  color:#E4E4E4 ;
-}
-
-.description p{
-  color:#666;
-  font-size: 20px;
-  width: 50%;
-  line-height: 1.5;
-}
-
-.description button{
-  border:1px  solid #E4E4E4;
-  background:#E4E4E4;
-  color:#2A2A2A;
-}
-
-/* styling the about section*/
-.about{
-  color: #2A2A2A;
-  margin: 4em 0;
-  padding: 1em;
-  position: relative;
-}
-
-.about h1{
-  color:#2A2A2A;
-  margin: 2em;
-}
-
-.about img{
-  height: 100%;
-  width: 100%;
-  border-radius: 50%
-}
-
-.about span{
-  display: block;
-  color: #2A2A2A;
-  position: absolute;
-  left: 115px;
-}
-
-.about .desc{
-  padding: 2em;
-}
-
-.about .desc h3{
-  color: #2A2A2A;
-}
-
-.about .desc p{
-  line-height:2;
-  color:#2A2A2A;
+.text-center {
+  font-family: 'Press Start 2P', cursive;
 }
 
 /* styling the projects section*/

@@ -27,7 +27,7 @@
 }
 
 /* Small devices (landscape phones, 576px and up) */
-@media (max-width: 576px) { 
+@media (max-width: 576px) {
   .display-intro {
     font-size: 30px;
   }
@@ -35,9 +35,13 @@
   .tech-stack {
     font-size: 11px;
   }
-  
+
   .intro {
     font-size: 9px;
+  }
+
+  .jumbo-intro {
+    margin-top: 100px;
   }
 }
 

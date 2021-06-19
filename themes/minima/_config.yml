@@ -1,9 +1,9 @@
 #title in header
-title: "Welcome"
+title: "Rahul Gurung"
 
 #main info
 #owner
-owner: "Rahul Gurung"
+owner: ""
 email: gurrrung@gmail.com
 info: "Software Engineer @Walmart"
 #description
@@ -11,9 +11,9 @@ desc: ""
 
 #menu
 menu:
+  Posts: /posts
   Talks: /talks
   Projects: /projects
-  About: /About
 
 #index/main page max show posts (in number)
 max_post: 4

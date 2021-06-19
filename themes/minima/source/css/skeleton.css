@@ -279,16 +279,16 @@ p {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a:not(.icon) {
   color: inherit;
-  background-size: 100% 200%;
-  transition:
-    background-position .2s ease-in-out
+  /* background-size: 100% 200%; */
+  /* transition: */
+    /* background-position .2s ease-in-out */
 }
-
+/* 
 a:hover:not(.icon),
 a:focus:not(.icon) {
   background-position: 0 100%;
   color: #fff;
-}
+} */
 
 /* a:hover {
   background-color: #0FA0CE;

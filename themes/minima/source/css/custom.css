@@ -40,9 +40,9 @@ html {
 
 img {
   max-width: 100%;
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  /* -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
   -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6); */
   margin-bottom: 1%;
 }
 
@@ -121,6 +121,10 @@ img {
 
 .mr {
   margin-right: 32px;
+}
+
+.mr-2 {
+  margin-right: 2rem;
 }
 
 .mt-0 {
@@ -339,5 +343,40 @@ body.darkmode {
 
 .post-name {
   font-weight: bold;
-  font-size: 30px;
+  font-size: 22px;
+}
+
+/* Flexbox for posts */
+.post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-details {
+  font-size: 13px;
+  color: rgba(117, 117, 117, 1);
+  font-weight: 400;
+}
+
+.post-image {
+  width: 200px;
+  height: 134px;
+  object-fit: contain;
+}
+
+.post-description {
+  font-size: 16px;
+  color: rgba(117, 117, 117, 1);
+  font-weight: 400;
+}
+
+/* If the screen size is 600px or less, set the font-size of <div> to 30px */
+@media only screen and (max-width: 600px) {
+  .post-image {
+    display: none;
+  }
+  .post-description {
+    display: none;
+  }
 }

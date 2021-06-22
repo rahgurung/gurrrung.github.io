@@ -11,7 +11,7 @@ desc: ""
 
 #menu
 menu:
-  Posts: /posts
+  Posts: /archives
   Talks: /talks
   Projects: /projects
 
@@ -43,7 +43,7 @@ switch_light: ☀️
 switch_dark: 🌑
 
 # favicon
-favicon: /images/favicon.png
+favicon: /images/favicon.jpg
 # thumbnail
 thumbnail: /images/thumbnail.jpg
 

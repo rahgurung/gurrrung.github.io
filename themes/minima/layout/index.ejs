@@ -4,12 +4,29 @@
     <h2 class="mb-2">
       <%= theme.owner %>
     </h2>
-    <p>
-      <%= theme.info %>
+    <p class="fw-light fs-18">
+      I am a Software Engineer based out of India currently working for
+      <a href="https://www.walmart.com/"><u>@Walmart</u>,</a>
+      I usually like spending weekends on my computer but sometimes going out on 
+      <u>hikes</u>
+      or
+      <u>long runs</u> is my alternate adventure.
     </p>
     <p>
       <%= theme.desc %>
     </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <%- partial('partial/projects') %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <p class="home fs-18">My latest articles</p>
   </div>
 </div>
 
@@ -25,7 +42,7 @@
       </a>
       <div class="post-description">
         <p class="bottom">
-          <%- post.description %> ...
+          <%- post.description %>
         </p>
       </div>
       <div class="post-details">
@@ -34,9 +51,11 @@
         </p>
       </div>
     </div>
-    <div>
-      <img class="post-image" src="<%-post.path%>profile.jpeg">
-    </div>
+    <!-- <% if (post.profileimage === true) { %>
+      <div>
+        <img class="post-image" src="<%-post.path%>profile.jpeg">
+      </div>
+    <% } %> -->
   </div>
   <% }) %>
 

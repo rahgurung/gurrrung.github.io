@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="two columns" style="max-width: 50px">
     <h1 class="mt-2 mode">
       <div onclick=setDarkMode(true) id="darkBtn"><%= theme.switch_dark %></div>
@@ -23,31 +23,63 @@
         }
       </script>
     </h1>
-  </div>
+  </div> -->
 
-  <div class="six columns ml-1">
-    <h1 class="mt-2">
+  <div class="mt-2 header">
+    <div class="author-title">
       <a href="<%= config.root %>"><%= theme.title %></a>
-    </h1>
+    </div>
+    <span class="caret" onclick="openNav()">&#9776;</span>
   </div>
 
-  <div class="twelve columns">
+  <div class="twelve columns navbar">
     <div class="row">
       <div class="nine columns left">
         <% for (name in theme.menu) { %>
           <% if (theme.menu[name]) { %>
-          <a href="<%- url_for(theme.menu[name]) %>" class="mr-2"><%- name %></a>
+          <a href="<%- url_for(theme.menu[name]) %>" class="mr-1 fw-light fs-18"><%- name %></a>
           <% } %>
         <% } %>
         <% if (theme.email) { %>
           <% if (typeof obfuscate === "function") { %>
-            <a href="mailto:<%- obfuscate(theme.email) %>" target="_blank" class="mr-2">Email</a>
+            <a href="mailto:<%- obfuscate(theme.email) %>" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
           <% } else { %>
-            <a href="mailto:<%= theme.email %>" target="_blank" class="mr-2">Email</a>
+            <a href="mailto:<%= theme.email %>" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
           <% } %>
         <% } %>
       </div>
     </div>
     <hr style="margin-bottom: 2.6rem">
   </div>
+
+  <!-- Mobile Screen Navbar -->
+  <div class="sidenavbar" id="sidenavbar">
+    <div class="row">
+      <div class="sidenavbar__buttons">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <% for (name in theme.menu) { %>
+          <% if (theme.menu[name]) { %>
+          <a href="<%- url_for(theme.menu[name]) %>" class="mr-1 fw-light fs-18"><%- name %></a>
+          <% } %>
+        <% } %>
+        <% if (theme.email) { %>
+          <% if (typeof obfuscate === "function") { %>
+            <a href="mailto:<%- obfuscate(theme.email) %>" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          <% } else { %>
+            <a href="mailto:<%= theme.email %>" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          <% } %>
+        <% } %>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  function openNav() {
+    document.getElementById("sidenavbar").style.width = "100%";
+  }
+
+  function closeNav() {
+    document.getElementById("sidenavbar").style.width = "0";
+  }
+</script>

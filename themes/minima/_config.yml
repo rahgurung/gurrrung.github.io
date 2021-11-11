@@ -4,7 +4,7 @@ title: "Rahul Gurung"
 #main info
 #owner
 owner: ""
-email: gurrrung@gmail.com
+email: gurungrahul2@gmail.com
 info: "Software Engineer @Walmart"
 #description
 desc: ""
@@ -12,8 +12,9 @@ desc: ""
 #menu
 menu:
   Posts: /archives
-  Talks: /talks
+  # Talks: /talks
   Projects: /projects
+  Experience: /experience
 
 #index/main page max show posts (in number)
 max_post: 4
@@ -25,7 +26,7 @@ tcolor: 0FA0CE
 # Define path to user css
 #(could be also located outside of theme)
 # Relative to source/ directory
-usercss: css/user.css
+# usercss: css/user.css
 
 # social profile at the footer/bottom
 footer: true
@@ -51,5 +52,5 @@ article:
   thumbnail: true
 
 # DISQUS comments (sign up to Disqus to get disqus_shortname)
-disqus_enabled: true
+disqus_enabled: false
 disqus_shortname: rahulgurung

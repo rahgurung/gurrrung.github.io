@@ -423,6 +423,14 @@ body.darkmode {
     display: none;
   }
 
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  body {
+    scrollbar-width: none;  /* Firefox */
+  }
+
   .caret {
     display: block;
   }

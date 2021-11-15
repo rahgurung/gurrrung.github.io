@@ -15,10 +15,10 @@
   
   <link rel="canonical" href="https://gurrrung.github.io/How-to-fix-PHP-errors-for-beginners/">
   
-  <meta name="description" content="This is my first post here.">
+  <meta name="description" content="PHP errors are easy to be debugged as PHP has a well-defined error management system that gives you details of the error. This article is designed for">
   
   
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Rahul Gurung">
   
   <meta property="og:image" content="https://gurrrung.github.ioundefined">
   
@@ -26,14 +26,14 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="How to fix PHP errors for beginners?" />
   
-  <meta property="og:description" content="This is my first post here.">
+  <meta property="og:description" content="PHP errors are easy to be debugged as PHP has a well-defined error management system that gives you details of the error. This article is designed for">
   
   <meta property="og:url" content="https://gurrrung.github.io/How-to-fix-PHP-errors-for-beginners/" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How to fix PHP errors for beginners?">
   
-  <meta name="twitter:description" content="This is my first post here.">
+  <meta name="twitter:description" content="PHP errors are easy to be debugged as PHP has a well-defined error management system that gives you details of the error. This article is designed for">
   
   
   <meta name="twitter:image" content="https://gurrrung.github.ioundefined">
@@ -66,18 +66,6 @@
   
 <link rel="stylesheet" href="/css/prism-line-numbers.css">
 
-<!-- 
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/custom.css">
-  <link rel="stylesheet" href="css/prism-dark.css">
-  <link rel="stylesheet" href="css/prism-line-numbers.css">
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/skeleton.css">
-  <link rel="stylesheet" href="/css/custom.css">
-  <link rel="stylesheet" href="/css/prism-dark.css">
-  <link rel="stylesheet" href="/css/prism-line-numbers.css"> -->
-  
   <!-- User css -->
   
 
@@ -167,51 +155,96 @@
     </h1>
   </div> -->
 
-  <div class="six columns ml-1">
-    <h1 class="mt-2">
+  <div class="mt-2 header">
+    <div class="author-title">
       <a href="/">Rahul Gurung</a>
-    </h1>
+    </div>
+    <span class="caret" onclick="openNav()">&#9776;</span>
   </div>
 
-  <div class="twelve columns">
+  <div class="twelve columns navbar">
     <div class="row">
       <div class="nine columns left">
         
           
-          <a href="/archives" class="mr-2">Posts</a>
+          <a href="/archives" class="mr-1 fw-light fs-18">Posts</a>
           
         
           
-          <a href="/talks" class="mr-2">Talks</a>
+          <a href="/projects" class="mr-1 fw-light fs-18">Projects</a>
           
         
           
-          <a href="/projects" class="mr-2">Projects</a>
-          
-        
-          
-          <a href="/experience" class="mr-2">Experience</a>
+          <a href="/experience" class="mr-1 fw-light fs-18">Experience</a>
           
         
         
           
-            <a href="mailto:gurrrung@gmail.com" target="_blank" class="mr-2">Connect</a>
+            <a href="mailto:gurungrahul2@gmail.com" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
           
         
       </div>
     </div>
     <hr style="margin-bottom: 2.6rem">
   </div>
+
+  <!-- Mobile Screen Navbar -->
+  <div class="sidenavbar" id="sidenavbar">
+    <div class="row">
+      <div class="sidenavbar__buttons">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+          
+          <a href="/archives" class="mr-1 fw-light fs-18">Posts</a>
+          
+        
+          
+          <a href="/projects" class="mr-1 fw-light fs-18">Projects</a>
+          
+        
+          
+          <a href="/experience" class="mr-1 fw-light fs-18">Experience</a>
+          
+        
+        
+          
+            <a href="mailto:gurungrahul2@gmail.com" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          
+        
+      </div>
+    </div>
+  </div>
 </div>
 
+<script>
+  function openNav() {
+    document.getElementById("sidenavbar").style.width = "100%";
+  }
+
+  function closeNav() {
+    document.getElementById("sidenavbar").style.width = "0";
+  }
+</script>
         <div class="trans">
             <h2>How to fix PHP errors for beginners?</h2>
 
-  <img src="/How-to-fix-PHP-errors-for-beginners/profile.jpeg" class="">
+  <p>PHP errors are easy to be debugged as PHP has a well-defined error management system that gives you details of the error. This article is designed for very beginners who are new to the world of the web.</p>
+<blockquote>
+<p>A typical PHP error looks like this</p>
+</blockquote>
+<img src="/How-to-fix-PHP-errors-for-beginners/error.png" class="">
 
-<p>This is my first post here.</p>
+<p>I made a diagram to make it easy to break it down as:</p>
+<img src="/How-to-fix-PHP-errors-for-beginners/profile.jpeg" class="">
 
-  <p> — Jun 19, 2021</p>
+<ol>
+<li><strong>Type of error</strong>: This part tells the type of the error. You can see a brief about them here. Using this part you can make an idea about what the error can be like wrong syntax, undefined index etc.</li>
+<li><strong>Suspected code</strong>: This part tells the part in your code that is infected. To fix this error most probably you need to make a change in this part of your code.</li>
+<li><strong>File Location</strong>: This is the handiest and useful feature which tells you the file name in which an error has occurred. In case you have multiple files in your PHP or you are using a separate file to make HTTP requests, this can be helpful.</li>
+<li><strong>Line no</strong>: As it sounds, this part of the error tells where the error actually is in the specified file so that you can review only specific code and make the fixes.</li>
+</ol>
+
+  <p><a class="classtest-link" href="/tags/PHP/" rel="tag">PHP</a> — Jun 20, 2020</p>
   
 
 
@@ -244,10 +277,6 @@
       </a>
       
 
-      
-      <a class="ml-0 footer-link icon" href="https://www.instagram.com/gurrrrung/" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Instagram">
-        <svg class="instagram svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
-      </a>
       
 
       

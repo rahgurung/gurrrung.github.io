@@ -1,8 +1,8 @@
 ---
 title: How to fix PHP errors for beginners?
 description: A quick guide on reading the PHP error logs.
-date: 2021-06-19 17:45:55
-readtime: 3
+date: 2020-06-20 17:45:55
+readtime: 2
 tags: PHP
 ---
 

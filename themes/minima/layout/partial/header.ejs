@@ -42,9 +42,9 @@
         <% } %>
         <% if (theme.email) { %>
           <% if (typeof obfuscate === "function") { %>
-            <a href="mailto:<%- obfuscate(theme.email) %>" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+            <a href="mailto:<%- obfuscate(theme.email) %>?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
           <% } else { %>
-            <a href="mailto:<%= theme.email %>" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+            <a href="mailto:<%= theme.email %>?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
           <% } %>
         <% } %>
       </div>
@@ -64,9 +64,9 @@
         <% } %>
         <% if (theme.email) { %>
           <% if (typeof obfuscate === "function") { %>
-            <a href="mailto:<%- obfuscate(theme.email) %>" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+            <a href="mailto:<%- obfuscate(theme.email) %>?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
           <% } else { %>
-            <a href="mailto:<%= theme.email %>" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+            <a href="mailto:<%= theme.email %>?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
           <% } %>
         <% } %>
       </div>

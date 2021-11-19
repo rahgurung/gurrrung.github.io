@@ -27,7 +27,7 @@ tcolor: 0FA0CE
 google_analytics: UA-72221639-2
 
 # Define path to user css
-#(could be also located outside of theme)
+# (could be also located outside of theme)
 # Relative to source/ directory
 # usercss: css/user.css
 

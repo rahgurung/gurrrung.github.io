@@ -480,7 +480,7 @@ body.darkmode {
   margin-right: 4.3rem;
 }
 
-/* Projects page */
+/* Projects and experience page */
 .block {
   display: inline-flex;
   gap: 1rem;
@@ -510,4 +510,11 @@ body.darkmode {
 .logo {
   width: 4rem;
   max-width: none;
+}
+
+.experience__container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem;
 }

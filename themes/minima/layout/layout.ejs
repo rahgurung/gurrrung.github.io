@@ -116,6 +116,8 @@
       <div>
         <% if (!is_post()) { %>
           <%- partial('partial/header') %>
+        <% } else { %>
+          <div style="height: 2rem;"></div>
         <% } %>
 
         <div class="trans">

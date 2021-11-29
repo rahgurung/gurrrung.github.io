@@ -1,10 +1,15 @@
 <div class="row mt-2">
   <% if (theme.footer) { %>
     <div class="eight columns">
-      <p id="madewith">Made with ❤
-        <% if (theme.placename && theme.placelink) { %>
-        at <a href="<%- theme.placelink %>" target="_blank" rel="noreferrer"><%- theme.placename %></a>.</p>
-        <% } %>
+      <%if(is_post()) { %>
+        <p id="madewith">This article is written by
+          <a href="/" rel="noreferrer"><span class="link">Rahul Gurung</span></a>.</p>
+      <% } else { %>
+        <p id="madewith">Made with ❤
+          <% if (theme.placename && theme.placelink) { %>
+          at <a href="<%- theme.placelink %>" target="_blank" rel="noreferrer"><%- theme.placename %></a>.</p>
+          <% } %>
+      <% } %>
     </div>
 
     <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->

@@ -1,5 +1,5 @@
   <h2><%- page.title %></h2>
-
+  <hr style="margin: 1rem 0 1rem 0;">
   <%- page.content%>
   <p><%- list_tags(page.tags, {class: 'classtest', show_count: false, style: false}) %> — <%- full_date(page.date, 'll') %></p>
   <%- partial('partial/comments') %>

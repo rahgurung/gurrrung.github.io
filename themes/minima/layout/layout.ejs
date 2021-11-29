@@ -114,8 +114,10 @@
   <div class="container">
     <div class="row">
       <div>
+        <% if (!is_post()) { %>
+          <%- partial('partial/header') %>
+        <% } %>
 
-        <%- partial('partial/header') %>
         <div class="trans">
           <%- body %>
           <%- partial('partial/footer') %>

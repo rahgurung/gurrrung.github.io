@@ -518,3 +518,8 @@ body.darkmode {
   align-items: baseline;
   column-gap: 1rem;
 }
+
+/* Code block */
+code {
+  background: rgba(0,0,0,.05);
+}

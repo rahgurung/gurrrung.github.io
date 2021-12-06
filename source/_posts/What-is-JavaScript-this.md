@@ -228,7 +228,7 @@ console.log(x()); // From Global
 
 // Use call to set the `this` context
 var y = doSomething.call(Context);
-console.log(y);
+console.log(y); // From Global
 {% endcodeblock %}
 
 **`this` in classes:** The behaviour of `this` in classes and functions is the same since classes are nothings but functions under the hood. Still, I would suggest a read [<u>here</u>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#class_context) that has a few corner cases. A common convention is to override `this` behavior so that `this` within classes always refers to the class instance. This is commonly seen in React Class components.

@@ -3,6 +3,7 @@ title: CSS `rem` units demystified!
 readtime: 7
 date: 2021-12-21 19:28:15
 description: Why you should consider `rem` units in your frontend projects?
+thumbnail: /CSS-rem-units-Demystified/header.png
 tags:
   - CSS
   - Web Development

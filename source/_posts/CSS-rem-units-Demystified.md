@@ -1,9 +1,11 @@
 ---
 title: CSS `rem` units demystified!
-readtime: 3
-date: 2021-12-15 19:28:15
-description:
+readtime: 7
+date: 2021-12-21 19:28:15
+description: Why you should consider `rem` units in your frontend projects?
 tags:
+  - CSS
+  - Web Development
 ---
 
 In this article, I am going to talk about why I prefer  [rem](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units) which is a relative CSS unit over other CSS units. First of all, I like each CSS unit available and this post isn't going to ask you to ditch them all but there are certain places where you should be using `rem` and it does the job better. Let's understand what `rem` is first.
@@ -49,9 +51,23 @@ When a `font-size` is described using `rem` it respects the user's font size pre
 As already discussed `rem` is based on the `font-size` of the root element. Thus we can change that root elements `font-size` to configure `rem`. This makes it highly usable as I am going to discuss further.
 
 ## My favorite way to use `rem`.
-I usually configure the value of `1rem` to be equal to that of `10px` which usually better as you can map things in your head. I am not the inventor of this trick, it has been around since `rem` came and heres a simple explanation on how we would do that.
+I usually configure the value of `1rem` to be equal to that of `10px` which is usually better as you can map things in your head. I am not the inventor of this trick, it has been around since `rem` came and heres a simple explanation on how we would do that.
 
--- write explanation --
+Since the font-size of root is `16px`, we can change it to 10px by doing a simple calculation:
 
-## What if you have no idea where to start?
-If you are complete beginner and want the best out of CSS units. Use `px` for layouts and images and `rem` for font size of the text. Simple and effective.
+16 * X = 10
+X = 10/16
+X = 62.5%
+
+In other words, `62.5%` of `16px` is `10px`. We will use this percent in the root element to configure `rem`.
+
+<p class="codepen" data-height="300" data-default-tab="css,result" data-slug-hash="rNGzdwZ" data-user="gurungrahul2" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/gurungrahul2/pen/rNGzdwZ">
+  rem customization</a> by Rahul Gurung (<a href="https://codepen.io/gurungrahul2">@gurungrahul2</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+<br>
+
+## Conclusion
+`rem` is a great unit to be considered for modern web development. Using `rem` completely depends on the use cases. If you are complete beginner and want the best out of CSS units. Use `px` for layouts and images and `rem` for font size of the text. You will get the best of both world, simple and effective.

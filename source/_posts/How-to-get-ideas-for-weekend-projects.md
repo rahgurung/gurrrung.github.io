@@ -1,7 +1,7 @@
 ---
 title: How to get ideas for weekend projects?
 readtime: 3
-thumbnail: /How-to-get-ideas-for-weekend-projects?/header.png
+thumbnail: /How-to-get-ideas-for-weekend-projects/header.png
 date: 2022-01-04 21:07:47
 description: My strategy on how I come up with project ideas and how you can too.
 tags:

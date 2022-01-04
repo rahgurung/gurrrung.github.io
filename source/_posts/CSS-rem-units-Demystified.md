@@ -9,7 +9,7 @@ tags:
   - Web Development
 ---
 
-In this article, I am going to talk about why I prefer  [rem](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units) which is a relative CSS unit over other CSS units. First of all, I like each CSS unit available and this post isn't going to ask you to ditch them all but there are certain places where you should be using `rem` and it does the job better. Let's understand what `rem` is first.
+In this article, I am going to talk about why I prefer  [<u>rem</u>](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units) which is a relative CSS unit over other CSS units. First of all, I like each CSS unit available and this post isn't going to ask you to ditch them all but there are certain places where you should be using `rem` and it does the job better. Let's understand what `rem` is first.
 
 ## What is `rem` ?
 `rem` is a CSS unit which is relative to the `font-size` of the root element (`html` tag). The default `font-size` value for the `html` element for most modern browsers is 16px which means by default 1 `rem` equals to 16 `px`.

@@ -2,7 +2,7 @@
 title: 'You Don''t Know JS: Notes'
 readtime: 20
 date: 2021-12-14 16:59:16
-description: A short notes of the book series, YDKJS by Kyle Simpson
+description: A short notes of the book series, YDKJS by Kyle Simpson.
 thumbnail: /You-Don-t-Know-JS-Notes/header.png
 tags:
  - JavaScript

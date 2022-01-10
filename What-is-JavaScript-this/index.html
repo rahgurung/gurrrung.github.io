@@ -15,7 +15,7 @@
   
   <link rel="canonical" href="https://rahulgurung.com/What-is-JavaScript-this/">
   
-  <meta name="description" content="To be published in Walmart’s Medium portal soon.">
+  <meta name="description" content="this is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written">
   
   
   <meta name="keywords" content="JavaScript, ReactJS, VueJS, HTML, CSS, Walmart, Startup, Bootstrap, Funding">
@@ -28,14 +28,14 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="What is JavaScript `this`?" />
   
-  <meta property="og:description" content="To be published in Walmart’s Medium portal soon.">
+  <meta property="og:description" content="this is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written">
   
   <meta property="og:url" content="https://rahulgurung.com/What-is-JavaScript-this/" />
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="What is JavaScript `this`?">
   
-  <meta name="twitter:description" content="To be published in Walmart’s Medium portal soon.">
+  <meta name="twitter:description" content="this is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written">
   
   
   <meta name="twitter:image" content="https://rahulgurung.comundefined">
@@ -253,18 +253,13 @@
         <div class="trans">
             <h2>What is JavaScript `this`?</h2>
 
-  <p>To be published in Walmart’s Medium <a target="_blank" rel="noopener" href="https://medium.com/walmartglobaltech"><u>portal</u></a> soon.</p>
-<!-- 
-`this` is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written for beginners but even experienced developers can use it as a refresher. `this` is a special identifier keyword which is automatically defined in the scope of every function but what it actually refers to is the real deal. This post is divided into three parts and in the first part, we will talk about what `this` is and then we’ll talk about some common misconceptions about `this` and finally, we will see some features of JS related to `this` keyword.
+  <p><code>this</code> is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written for beginners but even experienced developers can use it as a refresher. <code>this</code> is a special identifier keyword which is automatically defined in the scope of every function but what it actually refers to is the real deal. This post is divided into three parts and in the first part, we will talk about what <code>this</code> is and then we’ll talk about some common misconceptions about <code>this</code> and finally, we will see some features of JS related to <code>this</code> keyword.</p>
 <hr>
 
-## Prerequisite
-
-I believe learning is like working out and if you don’t warm yourself up properly then you might end up hurting yourself. Thus before talking about `this`, let’s talk about a few JavaScript concepts which you should be familiar with for this article.
-
-1) **The variables declared in the global scope as `var a = 2;` are nothing but global-object properties of the same name.** Yes, they are not copies of each other but are each other. To make this clearer look at the example below how we are able to access the value of `x` as the key of the global object `window`. Further, a thing to must note here is this only works with declarations using `var`, not `let/const`.
-
-
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>I believe learning is like working out and if you don’t warm yourself up properly then you might end up hurting yourself. Thus before talking about <code>this</code>, let’s talk about a few JavaScript concepts which you should be familiar with for this article.</p>
+<ol>
+<li><strong>The variables declared in the global scope as <code>var a = 2;</code> are nothing but global-object properties of the same name.</strong> Yes, they are not copies of each other but are each other. To make this clearer look at the example below how we are able to access the value of <code>x</code> as the key of the global object <code>window</code>. Further, a thing to must note here is this only works with declarations using <code>var</code>, not <code>let/const</code>.</li>
+</ol>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// This example is supposed to run on Console of any modern browser</span>
 
 <span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">"Hello World!"</span><span class="token punctuation">;</span>
@@ -448,7 +443,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2 id="References-and-Recommended-Reads"><a href="#References-and-Recommended-Reads" class="headerlink" title="References and Recommended Reads:"></a>References and Recommended Reads:</h2><ol>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/this%20&%20object%20prototypes/README.md#you-dont-know-js-this--object-prototypes"><u>You Don’t Know JS: this and Object Prototype</u></a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"><u>this: MDN docs</u></a> –&gt;</p>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"><u>this: MDN docs</u></a></p>
 </li>
 </ol>
 

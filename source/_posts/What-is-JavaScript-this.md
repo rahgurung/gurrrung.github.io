@@ -8,8 +8,6 @@ tags:
  - Web Development
 ---
 
-To be published in Walmart's Medium [<u>portal</u>](https://medium.com/walmartglobaltech) soon.
-<!-- 
 `this` is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written for beginners but even experienced developers can use it as a refresher. `this` is a special identifier keyword which is automatically defined in the scope of every function but what it actually refers to is the real deal. This post is divided into three parts and in the first part, we will talk about what `this` is and then we’ll talk about some common misconceptions about `this` and finally, we will see some features of JS related to `this` keyword.
 <hr>
 
@@ -249,4 +247,4 @@ console.log(y); // From Global
 
  1. [<u>You Don't Know JS: this and Object Prototype</u>](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/this%20&%20object%20prototypes/README.md#you-dont-know-js-this--object-prototypes)
 
- 2. [<u>this: MDN docs</u>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) -->
+ 2. [<u>this: MDN docs</u>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)

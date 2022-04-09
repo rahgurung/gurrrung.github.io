@@ -15,11 +15,11 @@ Well, recently I came across a trick and couldn’t believe that it has always b
 
 Let me explain with an example of **Jquery**. If you ever wish to run Jquery on Console just go to [<u>jquery.com</u>](https://jquery.com) and open *Console* and boom. You have your free Jquery playground available to you.
 
-![](https://cdn-images-1.medium.com/max/2024/1*F7auNXaUjFvlnbWW_Y8N6w.png)
+![Example 1](/How-to-test-a-JS-library-on-a-browser-console-without-any-hassle/example1.png)
 
 Let me illustrate it with another example, I will simply get the elements with the id *menu-top* using the Jquery syntax and magic, it works.
 
-![](https://cdn-images-1.medium.com/max/2024/1*qMv8j1YzhMlonH9kH98jow.png)
+![Example 2](/How-to-test-a-JS-library-on-a-browser-console-without-any-hassle/example2.png)
 
 This trick is available in a lot of other libraries like [<u>lodash</u>](https://lodash.com/docs/4.17.15), [<u>underscore</u>](https://underscorejs.org/), [<u>Ramda</u>](https://ramdajs.com/docs/) and even in [<u>ReactJS</u>](https://reactjs.org/) too further this might be there in your favorite library also. Let me know other cool libraries where we can do this.
 

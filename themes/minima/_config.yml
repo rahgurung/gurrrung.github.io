@@ -3,7 +3,7 @@ title: "Rahul Gurung"
 
 #main info
 #owner
-email: gurungrahul2@gmail.com
+email: hi@rahulgurung.com
 info: "Software Engineer @Walmart"
 #description
 
@@ -13,7 +13,7 @@ menu:
   # Talks: /talks
   Projects: /projects
   Experience: /experience
-  Newsletter: https://www.getrevue.co/profile/gurrrung
+  Newsletter: https://www.getrevue.co/profile/rahgurung
 
 #index/main page max show posts (in number)
 max_post: 4
@@ -34,9 +34,9 @@ google_analytics: UA-72221639-2
 footer: true
 placename: Earth
 placelink: https://en.wikipedia.org/wiki/Earth
-github: https://github.com/gurrrung
-linkedin: https://www.linkedin.com/in/gurrrung/
-twitter: https://twitter.com/gurrrung
+github: https://github.com/rahgurung
+linkedin: https://www.linkedin.com/in/rahgurung/
+twitter: https://twitter.com/rahgurung
 instagram: 
 stackoverflow: https://stackoverflow.com/users/9514156/r-gurung
 

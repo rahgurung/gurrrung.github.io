@@ -19,13 +19,13 @@ I’ve been trying to setup [<u>Husky</u>](https://typicode.github.io/husky/#/) 
 
 ---
 
- 1. Start with installing Husky using the automatic setup command given below. This will install Husky and create a pre-commit hook in the .husky/pre-commit file. The pre-commit hook is run before we even write the commit message. It is used to inspect the code before we commit it, lint checks and tests commands can be placed in this file if required.
+ 1. Start with installing Husky using the automatic setup command given below. This will install Husky and create a `pre-commit` hook in the `.husky/pre-commit` file. The `pre-commit` hook is run before we even write the commit message. It is used to inspect the code before we commit it, lint checks and tests commands can be placed in this file if required.
 
 {% codeblock lang:js %}
     npx husky-init && npm install
 {% endcodeblock %}
 
->  Don’t place your Commitizen command in pre-commit file as it will not be able to add the commit message creating empty messages even after input.
+>  Don’t place your Commitizen command in `pre-commit` file as it will not be able to add the commit message creating empty messages even after input.
 
 2. Let’s install Commitizen and a famous commit message convention to be followed by our project.
 
@@ -33,12 +33,10 @@ I’ve been trying to setup [<u>Husky</u>](https://typicode.github.io/husky/#/) 
     npm install -g commitizen commitizen init cz-conventional-changelog --save-dev --save-exact
 {% endcodeblock %}
 
-3. Now earlier we could just add the command we want to run with git hooks in  package.json itself but now this is deprecated. To add Commitizen to git hooks we have to create a file in .husky folder with the same name as the git hook we want. For Commitizen we need prepare-commit-msg hook. prepare-commit-msg hook is run before the commit message editor opens but after the default message is created. It lets us edit the default message of our commit giving us the ability to use Commitizen command here. Below is given the Husky command which will create the file and also add the command triggering Commitizen to the same file.
+3. Now earlier we could just add the command we want to run with git hooks in  `package.json` itself but now this is deprecated. To add Commitizen to git hooks we have to create a file in `.husky` folder with the same name as the git hook we want. For Commitizen we need `prepare-commit-msg` hook. `prepare-commit-msg` hook is run before the commit message editor opens but after the default message is created. It lets us edit the default message of our commit giving us the ability to use Commitizen command here. Below is given the Husky command which will create the file and also add the command triggering Commitizen to the same file.
 
 {% codeblock lang:js %}
     npx husky add .husky/prepare-commit-msg 'exec < /dev/tty && npx cz --hook || true'
 {% endcodeblock %}
 
 >  That’s all. Try running git commit now and you will see nice input field open up which helps create standard git commit messages.
-
-

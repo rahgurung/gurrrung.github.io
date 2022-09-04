@@ -3,7 +3,7 @@ title: 'A day hike to Lamadugh, Manali'
 readtime: 5
 thumbnail: '/A-day-hike-to-Lamadugh-Manali/header.png'
 date: 2022-05-26 20:29:51
-description: A guide for Lamadugh trek with lot of images.
+description: Walkthrough of an amazing hike I did last year in Manali.
 tags: 
   - Trekking
   - Hiking

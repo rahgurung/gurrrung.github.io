@@ -6,7 +6,7 @@ readtime: 3
 thumbnail: >-
   /How-to-use-the-latest-Husky-8-with-Commitizen-for-adding-git-hooks-to-your-projects/header.png
 date: 2022-06-17 22:55:03
-description: Guide to setup git hooks in your project using Husky and Commitizen
+description: Setting up Commitizen with git hooks is changed since Husky 8 release, this is the new method to achieve that.
 tags:
   - Git
   - Husky

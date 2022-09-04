@@ -3,7 +3,7 @@ title: How to test a JS library on a browser console without any hassle?
 readtime: 1
 thumbnail: /How-to-test-a-JS-library-on-a-browser-console-without-any-hassle/header.png
 date: 2022-04-09 23:18:05
-description: A cool trick to run your libraries on browser console.
+description: A cool trick to use certain JS libraries right there in the console.
 tags:
   - JavaScript
   - Web Development

@@ -3,7 +3,7 @@ title: Introduction to React Native Navigation
 readtime: 25
 thumbnail: /Introduction-to-React-Native-Navigation/header.png
 date: 2022-09-04 12:27:50
-description: Understanding the structure of React Native Navigation components
+description: An easy to understand explanation to React Native Navigation with visual diagrams, code and output animations.
 tags:
   - ReactJS
   - React Native

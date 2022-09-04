@@ -256,12 +256,12 @@
   <p>I’ve been trying to setup <a target="_blank" rel="noopener" href="https://typicode.github.io/husky/#/"><u>Husky</u></a> with <a target="_blank" rel="noopener" href="https://github.com/commitizen/cz-cli"><u>Commitizen</u></a> to add <a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks"><u>git hooks</u></a> to my project. I wanted if when anyone does git commit on the project, it should open the Commitizen menu for creating nice commit messages. But seems like recently Husky released its 8 version which has breaking changes, which means most of the online articles using package.json to achieve the above goal are outdated now and won’t work. I did some research and dived into the documentation to see what should be the changes to setup Commitizen for Husky 8. Below given are steps about how I achieved it.</p>
 <hr>
 <ol>
-<li>Start with installing Husky using the automatic setup command given below. This will install Husky and create a pre-commit hook in the .husky&#x2F;pre-commit file. The pre-commit hook is run before we even write the commit message. It is used to inspect the code before we commit it, lint checks and tests commands can be placed in this file if required.</li>
+<li>Start with installing Husky using the automatic setup command given below. This will install Husky and create a <code>pre-commit</code> hook in the <code>.husky/pre-commit</code> file. The <code>pre-commit</code> hook is run before we even write the commit message. It is used to inspect the code before we commit it, lint checks and tests commands can be placed in this file if required.</li>
 </ol>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js">npx husky<span class="token operator">-</span>init <span class="token operator">&amp;&amp;</span> npm install<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <blockquote>
-<p> Don’t place your Commitizen command in pre-commit file as it will not be able to add the commit message creating empty messages even after input.</p>
+<p> Don’t place your Commitizen command in <code>pre-commit</code> file as it will not be able to add the commit message creating empty messages even after input.</p>
 </blockquote>
 <ol start="2">
 <li>Let’s install Commitizen and a famous commit message convention to be followed by our project.</li>
@@ -269,7 +269,7 @@
 <pre class="line-numbers language-js" data-language="js"><code class="language-js">npm install <span class="token operator">-</span>g commitizen commitizen init cz<span class="token operator">-</span>conventional<span class="token operator">-</span>changelog <span class="token operator">--</span>save<span class="token operator">-</span>dev <span class="token operator">--</span>save<span class="token operator">-</span>exact<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <ol start="3">
-<li>Now earlier we could just add the command we want to run with git hooks in  package.json itself but now this is deprecated. To add Commitizen to git hooks we have to create a file in .husky folder with the same name as the git hook we want. For Commitizen we need prepare-commit-msg hook. prepare-commit-msg hook is run before the commit message editor opens but after the default message is created. It lets us edit the default message of our commit giving us the ability to use Commitizen command here. Below is given the Husky command which will create the file and also add the command triggering Commitizen to the same file.</li>
+<li>Now earlier we could just add the command we want to run with git hooks in  <code>package.json</code> itself but now this is deprecated. To add Commitizen to git hooks we have to create a file in <code>.husky</code> folder with the same name as the git hook we want. For Commitizen we need <code>prepare-commit-msg</code> hook. <code>prepare-commit-msg</code> hook is run before the commit message editor opens but after the default message is created. It lets us edit the default message of our commit giving us the ability to use Commitizen command here. Below is given the Husky command which will create the file and also add the command triggering Commitizen to the same file.</li>
 </ol>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js">npx husky add <span class="token punctuation">.</span>husky<span class="token operator">/</span>prepare<span class="token operator">-</span>commit<span class="token operator">-</span>msg <span class="token string">'exec &lt; /dev/tty &amp;&amp; npx cz --hook || true'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 

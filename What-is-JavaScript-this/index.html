@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>What is JavaScript `this`?</title>
+  
+  <link rel="canonical" href="https://rahulgurung.com/What-is-JavaScript-this/">
+  
+  <meta name="description" content="this is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written">
+  
+  
+  <meta name="keywords" content="JavaScript, ReactJS, VueJS, HTML, CSS, Walmart, Startup, Bootstrap, Funding">
+  
+  <meta name="author" content="Rahul Gurung">
+  
+  <meta property="og:image" content="https://rahulgurung.comundefined">
+  
+  <meta property="og:site_name" content="Rahul Gurung - A blog on modern Web, Startup, Hiking and everything in between." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="What is JavaScript `this`?" />
+  
+  <meta property="og:description" content="this is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written">
+  
+  <meta property="og:url" content="https://rahulgurung.com/What-is-JavaScript-this/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What is JavaScript `this`?">
+  
+  <meta name="twitter:description" content="this is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written">
+  
+  
+  <meta name="twitter:image" content="https://rahulgurung.comundefined">
+  
+  <meta name="twitter:url" content="https://rahulgurung.com/What-is-JavaScript-this/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.jpg">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    /* text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    ); */
+    text-decoration: none;
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    /* Prepare GA Session, disable cookies to protect privacy */
+    ga("create", "UA-72221639-2", {storage: "none",});
+    /* Privacy settings - not tracking anything personal */
+    ga("set", "allowAdFeatures", false);
+    ga("set", "anonymizeIp", true);
+    ga("set", "forceSSL", true);
+    /* Send simple anonymized pageview */
+    ga("send", "pageview");
+  </script>
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <!-- <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div> -->
+
+  <div class="mt-2 header">
+    <div class="author-title">
+      <a href="/">Rahul Gurung</a>
+    </div>
+    <span class="caret" onclick="openNav()">&#9776;</span>
+  </div>
+
+  <div class="twelve columns navbar">
+    <div class="row">
+      <div class="nine columns left">
+        
+          
+          <a href="/archives" class="mr-1 fw-light fs-18">Posts</a>
+          
+        
+          
+          <a href="/projects" class="mr-1 fw-light fs-18">Projects</a>
+          
+        
+          
+          <a href="/experience" class="mr-1 fw-light fs-18">Experience</a>
+          
+        
+          
+          <a target="_blank" rel="noopener" href="https://rahulgurung.substack.com" class="mr-1 fw-light fs-18">Newsletter</a>
+          
+        
+        
+          
+            <a href="mailto:hi@rahulgurung.com?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+
+  <!-- Mobile Screen Navbar -->
+  <div class="sidenavbar" id="sidenavbar">
+    <div class="row">
+      <div class="sidenavbar__buttons">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+          
+          <a href="/archives" class="mr-1 fw-light fs-18">Posts</a>
+          
+        
+          
+          <a href="/projects" class="mr-1 fw-light fs-18">Projects</a>
+          
+        
+          
+          <a href="/experience" class="mr-1 fw-light fs-18">Experience</a>
+          
+        
+          
+          <a target="_blank" rel="noopener" href="https://rahulgurung.substack.com" class="mr-1 fw-light fs-18">Newsletter</a>
+          
+        
+        
+          
+            <a href="mailto:hi@rahulgurung.com?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openNav() {
+    document.getElementById("sidenavbar").style.width = "100%";
+  }
+
+  function closeNav() {
+    document.getElementById("sidenavbar").style.width = "0";
+  }
+</script>
+        <div class="trans">
+            <h2>What is JavaScript `this`?</h2>
+
+  <p><code>this</code> is a JavaScript keyword which is vastly misunderstood by a lot of developers and this post aims to bridge that gap. While this article is written for beginners but even experienced developers can use it as a refresher. <code>this</code> is a special identifier keyword which is automatically defined in the scope of every function but what it actually refers to is the real deal. This post is divided into three parts and in the first part, we will talk about what <code>this</code> is and then we’ll talk about some common misconceptions about <code>this</code> and finally, we will see some features of JS related to <code>this</code> keyword.</p>
+<hr>
+
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>I believe learning is like working out and if you don’t warm yourself up properly then you might end up hurting yourself. Thus before talking about <code>this</code>, let’s talk about a few JavaScript concepts which you should be familiar with for this article.</p>
+<ol>
+<li><strong>The variables declared in the global scope as <code>var a = 2;</code> are nothing but global-object properties of the same name.</strong> Yes, they are not copies of each other but are each other. To make this clearer look at the example below how we are able to access the value of <code>x</code> as the key of the global object <code>window</code>. Further, a thing to must note here is this only works with declarations using <code>var</code>, not <code>let/const</code>.</li>
+</ol>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// This example is supposed to run on Console of any modern browser</span>
+
+<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">"Hello World!"</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "Hello World!"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li><strong>Call-site:</strong> The location where a function is called from is called <em>call-site</em>. Usually finding the <em>call-site</em> just comprises of locating the line where the function is called from but this can be misleading as a function can be called at multiple places in the code. Thus the most accurate way to find the <em>call-site</em> is to find the <em>call-stack</em> and then see where the function was called from or in other words what was the previous function in <em>call-stack</em>. Let’s understand this with an example.</li>
+</ol>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">first</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// call-stack: `first`</span>
+  <span class="token comment">// call-site: global-scope</span>
+  <span class="token function">second</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">second</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// call-stack: `first->second`</span>
+  <span class="token comment">// call-site is in `first`</span>
+  <span class="token function">third</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">third</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// call-stack: `first->second->third`</span>
+  <span class="token comment">// call-site is in `second`</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">first</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+
+<h2 id="What-is-this"><a href="#What-is-this" class="headerlink" title="What is this?"></a>What is this?</h2><p><code>this</code> is a binding made for each function invocation whose value depends on how and where the function is called. Binding made for <code>this</code> is usually related to variables declared using <code>var</code> and JavaScript running in <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode"><u>non-strict</u></a> mode. Further on the basis of the <em>call-site</em>, we can divide such bindings into four parts as given below:</p>
+<ul>
+<li><p>Default Binding</p>
+</li>
+<li><p>Implicit Binding</p>
+</li>
+<li><p>Explicit Binding</p>
+</li>
+<li><p><em>new</em> Binding</p>
+</li>
+</ul>
+<p><strong>Default Binding</strong>: When we call a function in the global scope normally with no special decoration. *this *inside the function gets bound with the global scope. Yes, you can access all global variables using <code>this</code> inside such functions. One thing to notice here is it is only applicable for <code>non-strict</code> mode and variables defined using <code>var</code>.</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// "use strict"; // uncomment to run in strict mode</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">"Hello World!"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Here the call-site of the function is global scope</span>
+<span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "Hello World!"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><em>Strict mode</em>: The value of <code>this</code> is undefined in this case.</p>
+<p><em>let&#x2F;const</em>: The variables defined with <code>let/const</code> are not bound.</p>
+<p><strong>Implicit Binding</strong>: When the call-site of function has a containing object (context object) as given below. That context object is bound to <code>this</code> inside that function. In the example below, <code>obj</code> is the context object and <code>this</code> gets bound to this object and all the keys will be accessible inside the function using <code>this</code>.</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// This is the context object</span>
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  x<span class="token operator">:</span> <span class="token string">"Hello World!"</span><span class="token punctuation">,</span>
+  y<span class="token operator">:</span> doSomething
+<span class="token punctuation">&#125;</span>
+
+obj<span class="token punctuation">.</span><span class="token function">y</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "Hello World!"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><em>Strict mode</em>: This will work the same as <code>non-strict</code> mode.</p>
+<p><em>let&#x2F;const</em>: Not applicable</p>
+<p><strong>Explicit Binding</strong>: This binding gives us the superpower to assign <code>this</code> to anything. We can achieve this using <code>call(..)</code> and <code>apply(..)</code> methods. Yes, we can set <code>this</code> to an object, variable, function or anything. But there’s a catch, <code>null</code> and <code>undefined</code> are replaced with global object and primitives are converted into equivalent objects. Whatever we will pass as the first argument that will be used as <code>this</code> binding by the function call, sweet.</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// "use strict"; // uncomment to run in strict mode</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  x<span class="token operator">:</span> <span class="token string">"Hello World!"</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token string">"global"</span>
+
+<span class="token comment">// passing the object to be used for `this` explicitly</span>
+<span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// "Hello World!</span>
+<span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// "Hello World!</span>
+
+<span class="token comment">// passing the `null` and `undefined`, `this` will be bind to global scope</span>
+<span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// "Hello World!</span>
+<span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// "Hello World!</span>
+<span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// "Hello World!</span>
+<span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// "Hello World!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><em>Strict mode</em>: <code>null</code> and <code>undefined</code> don’t get replaced with the global object and primitives are not converted into objects.</p>
+<p><em>let&#x2F;const</em>: Not supported when <code>this</code> binds to the global object (either directly or after getting replaced from <code>null</code> or <code>undefined</code>) but variables defined with <code>let/const</code> can be directly passed as <code>this</code> and it will get bound.</p>
+<p><strong>New Binding:</strong> This one can feel a little odd from the rest of the binding rules. In this kind of binding, if we invoke the function with <code>new</code> keyword and assign it to a variable then <code>this</code> is bound to that variable. Look at the example below for understanding. Here we assign the value of <code>new  doSomething()</code> to <code>bar</code> thus inside the function, <code>this</code> gets bound to bar.</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token parameter">a</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token string">"World!"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> bar <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// `this` has been bound to bar here</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>bar<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Hello</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>bar<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// World!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><em>Strict mode</em>: No effect</p>
+<p><em>let&#x2F;const</em>: The variables defined can be both <code>let/const</code>, the same behaviour is observed.</p>
+<hr>
+
+<h2 id="What-this-isn’t"><a href="#What-this-isn’t" class="headerlink" title="What this isn’t?"></a>What this isn’t?</h2><p>Let’s see the most common misconceptions about <code>this</code> which a lot of developers have and dive deeper into each of them. People think <code>this</code> in a function refers to:</p>
+<ol>
+<li><p>Itself</p>
+</li>
+<li><p>Its Scope</p>
+</li>
+</ol>
+<p><strong>Itself</strong> Many developers believe that <code>this</code> refers to the function itself in which it is called which is wrong. Below is a simple example to prove it.</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// increment each time</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Create a property to the function object</span>
+increase<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Call function few times</span>
+<span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>increase<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 0 which means this doesn't refers the function itself</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Rather the correct way to keep track of how many times <code>increase</code> is called would be to actually use the <code>call</code> method to explicitly define the <code>this</code> keyword to be the <code>increase</code> object (itself). The below-given code example is a working example of it.</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// increment each time</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>x<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Create a property to the function object</span>
+increase<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Call function few times with using itself as `this`</span>
+<span class="token function">increase</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>increase<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">increase</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>increase<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>increase<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>Its Scope</strong> Another famous misconception developers have is that they think that it refers to the function’s scope. It is a tricky one because in global scope, <code>this</code> refers to the global scope itself but it is quite a misguided statement as we saw that it is not true in the previous section.</p>
+<hr>
+
+<h2 id="More-JavaScript-Features-around-this"><a href="#More-JavaScript-Features-around-this" class="headerlink" title="More JavaScript Features around this"></a>More JavaScript Features around this</h2><p><strong>bind() function:</strong> ES5 introduced this function which helps bind the value of <code>this</code> explicitly. <code>bind</code> returns a function with <code>this</code> set to the first argument of <code>bind</code>. This is something similar to <code>call</code> and <code>apply</code> but the difference is once we use <code>bind</code> the function retains its context so that it can be reused.</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>a<span class="token operator">:</span> <span class="token string">'Hello World!'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Hello World!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>arrow function:</strong> In these functions, <code>this</code> retains the value of the enclosing lexical context’s <code>this</code>. In global code, it will be set to the global object. Let’s see a few examples below:</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> doSomething <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">this</span><span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">"From Global"</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> Context <span class="token operator">=</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> <span class="token string">'Hello World!'</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Use bind to set the `this` context</span>
+<span class="token keyword">var</span> x <span class="token operator">=</span> <span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>Context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">x</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// From Global</span>
+
+<span class="token comment">// Use call to set the `this` context</span>
+<span class="token keyword">var</span> y <span class="token operator">=</span> <span class="token function">doSomething</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>Context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// From Global</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong><code>this</code> in classes:</strong> The behaviour of <code>this</code> in classes and functions is the same since classes are nothings but functions under the hood. Still, I would suggest a read <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#class_context"><u>here</u></a> that has a few corner cases. A common convention is to override <code>this</code> behavior so that <code>this</code> within classes always refers to the class instance. This is commonly seen in React Class components.</p>
+<p><strong>this as a DOM handler:</strong> When a function is used as an event handler, its <code>this</code> is set to the element on which the listener is placed. The code given below will print the DOM element itself.</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>console.log(this.tagName.toLowerCase())<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  Click to see the name of tag
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<hr>
+
+<h2 id="References-and-Recommended-Reads"><a href="#References-and-Recommended-Reads" class="headerlink" title="References and Recommended Reads:"></a>References and Recommended Reads:</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/this%20&%20object%20prototypes/README.md#you-dont-know-js-this--object-prototypes"><u>You Don’t Know JS: this and Object Prototype</u></a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this"><u>this: MDN docs</u></a></p>
+</li>
+</ol>
+
+  <p><a class="classtest-link" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="classtest-link" href="/tags/Web-Development/" rel="tag">Web Development</a> — Dec 6, 2021</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/rahgurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://www.linkedin.com/in/rahgurung/" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/rahgurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/users/9514156/r-gurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svh-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

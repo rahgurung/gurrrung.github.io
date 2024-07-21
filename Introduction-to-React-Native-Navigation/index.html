@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>Introduction to React Native Navigation</title>
+  
+  <link rel="canonical" href="https://rahulgurung.com/Introduction-to-React-Native-Navigation/">
+  
+  <meta name="description" content="In this article, we are going to learn how we can implement navigation in React Native. We are going to use React Navigation which is the official lib">
+  
+  
+  <meta name="keywords" content="JavaScript, ReactJS, VueJS, HTML, CSS, Walmart, Startup, Bootstrap, Funding">
+  
+  <meta name="author" content="Rahul Gurung">
+  
+  <meta property="og:image" content="https://rahulgurung.com/Introduction-to-React-Native-Navigation/header.png">
+  
+  <meta property="og:site_name" content="Rahul Gurung - A blog on modern Web, Startup, Hiking and everything in between." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Introduction to React Native Navigation" />
+  
+  <meta property="og:description" content="In this article, we are going to learn how we can implement navigation in React Native. We are going to use React Navigation which is the official lib">
+  
+  <meta property="og:url" content="https://rahulgurung.com/Introduction-to-React-Native-Navigation/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Introduction to React Native Navigation">
+  
+  <meta name="twitter:description" content="In this article, we are going to learn how we can implement navigation in React Native. We are going to use React Navigation which is the official lib">
+  
+  
+  <meta name="twitter:image" content="https://rahulgurung.com/Introduction-to-React-Native-Navigation/header.png">
+  
+  <meta name="twitter:url" content="https://rahulgurung.com/Introduction-to-React-Native-Navigation/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.jpg">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    /* text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    ); */
+    text-decoration: none;
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    /* Prepare GA Session, disable cookies to protect privacy */
+    ga("create", "UA-72221639-2", {storage: "none",});
+    /* Privacy settings - not tracking anything personal */
+    ga("set", "allowAdFeatures", false);
+    ga("set", "anonymizeIp", true);
+    ga("set", "forceSSL", true);
+    /* Send simple anonymized pageview */
+    ga("send", "pageview");
+  </script>
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <!-- <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div> -->
+
+  <div class="mt-2 header">
+    <div class="author-title">
+      <a href="/">Rahul Gurung</a>
+    </div>
+    <span class="caret" onclick="openNav()">&#9776;</span>
+  </div>
+
+  <div class="twelve columns navbar">
+    <div class="row">
+      <div class="nine columns left">
+        
+          
+          <a href="/archives" class="mr-1 fw-light fs-18">Posts</a>
+          
+        
+          
+          <a href="/projects" class="mr-1 fw-light fs-18">Projects</a>
+          
+        
+          
+          <a href="/experience" class="mr-1 fw-light fs-18">Experience</a>
+          
+        
+          
+          <a target="_blank" rel="noopener" href="https://rahulgurung.substack.com" class="mr-1 fw-light fs-18">Newsletter</a>
+          
+        
+        
+          
+            <a href="mailto:hi@rahulgurung.com?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+
+  <!-- Mobile Screen Navbar -->
+  <div class="sidenavbar" id="sidenavbar">
+    <div class="row">
+      <div class="sidenavbar__buttons">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+          
+          <a href="/archives" class="mr-1 fw-light fs-18">Posts</a>
+          
+        
+          
+          <a href="/projects" class="mr-1 fw-light fs-18">Projects</a>
+          
+        
+          
+          <a href="/experience" class="mr-1 fw-light fs-18">Experience</a>
+          
+        
+          
+          <a target="_blank" rel="noopener" href="https://rahulgurung.substack.com" class="mr-1 fw-light fs-18">Newsletter</a>
+          
+        
+        
+          
+            <a href="mailto:hi@rahulgurung.com?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openNav() {
+    document.getElementById("sidenavbar").style.width = "100%";
+  }
+
+  function closeNav() {
+    document.getElementById("sidenavbar").style.width = "0";
+  }
+</script>
+        <div class="trans">
+            <h2>Introduction to React Native Navigation</h2>
+
+  <p>In this article, we are going to learn how we can implement navigation in React Native. We are going to use <a target="_blank" rel="noopener" href="https://reactnavigation.org/"><u>React Navigation</u></a> which is the official library for adding routing and navigation to React Native applications. We are going to discuss the following types of Navigation and how to implement them:</p>
+<ul>
+<li>Stack Navigation</li>
+<li>Tab Navigation</li>
+<li>Drawer Navigation</li>
+</ul>
+<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a><strong>Prerequisites</strong></h3><ul>
+<li><p>Basics of React</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/getting-started"><u>React Navigation Setup</u></a></p>
+</li>
+</ul>
+<p><img src="https://cdn-images-1.medium.com/max/11520/1*FWsrWa7lzMLb6OBWaryBCg.png" alt="Stack Navigation Illustration"></p>
+<p><em><strong>Stack Navigation</strong></em> In this kind of navigation, a stack of screens is maintained. Each time we visit a screen, it is pushed to the stack, and pressing back will pop the item from the stack and show the last screen. A good example of this type of navigation is web pages where we navigate between different pages of a site and press back to move to the last page. Before we proceed, we need to add the library needed for Stack navigation.</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm install @react<span class="token operator">-</span>navigation<span class="token operator">/</span>native<span class="token operator">-</span>stack<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="How-we-can-create-screens"><a href="#How-we-can-create-screens" class="headerlink" title="How we can create screens?"></a><strong>How we can create screens?</strong></h3><p>To add screens available to be navigated through in the application, we need to create a basic structure as given in the code example below which includes initializing the Stack navigator with <code>createNativeStackNavigator()</code> and using it inside the <code>NavigationContainer</code>. </p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Text <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Imports related to navigation</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>NavigationContainer<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>createNativeStackNavigator<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native-stack'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Initialize the Stack navigator</span>
+<span class="token keyword">const</span> Stack <span class="token operator">=</span> <span class="token function">createNativeStackNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// We always surround navigator with NavigationContainer</span>
+<span class="token keyword">function</span> <span class="token function">StackNavigation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>NavigationContainer<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+        <span class="token punctuation">&#123;</span><span class="token comment">/* Add your screens here */</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>Stack<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>NavigationContainer<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> StackNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Inside <code>&lt;Stack.Navigator&gt;</code> is the place where we need to place all our screens. Each screen goes with <code>&lt;Stack.Screen&gt;</code> tag and we will pass two props <code>name</code> and <code>component</code>, where name is the name of the component, make sure that it is unique and avoid using special characters and spaces and component is the component we want to add as the screen. Below given is a code with two screens added. By default, the screen which comes first inside <code>&lt;Stack.Navigator&gt;</code> will be visible first to the user or in other words it will be the screen that will be pushed there in the stack already, for example in the below code Screen1 will be visible.</p>
+<blockquote>
+<p> <strong>Tip:</strong> We can also use <code>initialRouteName</code> prop on <code>Stack.Navigator</code> to specify the default screen too.</p>
+</blockquote>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>Text<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>NavigationContainer<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>createNativeStackNavigator<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native-stack'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Our Screens</span>
+<span class="token keyword">function</span> <span class="token function">Screen1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Text<span class="token operator">></span>Screen <span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">Screen2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Text<span class="token operator">></span>Screen <span class="token number">2</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Initialize the Stack navigator</span>
+<span class="token keyword">const</span> Stack <span class="token operator">=</span> <span class="token function">createNativeStackNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">StackNavigation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>NavigationContainer<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+        <span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Screen1"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Screen1<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Screen2"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Screen2<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>Stack<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>NavigationContainer<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> StackNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The application right now looks like the image given below where we see our default screen (Screen1) and currently there is no way to navigate to Screen2. We will talk about how to do that in the below section.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*OcoxK8WUzTNNgIcIUINhGA.png" alt="Screen1 is visible as the default screen"></p>
+<h3 id="How-we-can-travel-between-screens"><a href="#How-we-can-travel-between-screens" class="headerlink" title="How we can travel between screens?"></a>How we can travel between screens?</h3><p>Now that we have two screens in our application. Let’s see how we can move between these screens or we can say how we can push new screens to the stack. React Navigation comes with a method to achieve this called <code>navigate()</code> which is available in the navigation prop, this prop is added automatically for each screen. In <code>navigate()</code> method, we just need to pass the name of the screen we want to navigate to. This name is the same name that we set in the previous section. Let’s see a code example, where we have a button in Screen1 to navigate to Screen2 and a button in the latter to navigate to the former.</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>Text<span class="token punctuation">,</span> Button<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>NavigationContainer<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>createNativeStackNavigator<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native-stack'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Our Screens</span>
+<span class="token keyword">function</span> <span class="token function">Screen1</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span>navigation<span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>Text<span class="token operator">></span>Screen <span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Button
+        title<span class="token operator">=</span><span class="token string">"Go to Screen 2"</span>
+        onPress<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> navigation<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">'Screen2'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">Screen2</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span>navigation<span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>Text<span class="token operator">></span>Screen <span class="token number">2</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Button
+        title<span class="token operator">=</span><span class="token string">"Go to Screen 1"</span>
+        onPress<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> navigation<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">'Screen1'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Initialize the Stack navigator</span>
+<span class="token keyword">const</span> Stack <span class="token operator">=</span> <span class="token function">createNativeStackNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">StackNavigation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>NavigationContainer<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+        <span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Screen1"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Screen1<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>Stack<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Screen2"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Screen2<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>Stack<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>NavigationContainer<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> StackNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*LB6XfE_-FWER27br3sJgJA.gif" alt="Animation of navigation between screens"></p>
+<p>You can see that clicking on Go to Screen 2 takes us to <code>Screen2</code> and further, there is a back button available in the upper left section in <code>Screen2</code> to go back. Go to Screen 1 button in <code>Screen2</code> takes us back to Screen1 and behaves the same as pressing the back button, this is being handled by React Navigation Library. Instead of pushing new <code>Screen1</code> to stack, it is looking back in the history of the stack to navigate to the required page if found. Further in a similar fashion, if the page to navigate to is in the stack already, it will keep popping the stack until it reaches that page. If your requirement is to create new screens and push to stack instead of looking back in the history stack, use <code>navigation.push(&quot;name&quot;)</code> instead of <code>navigation.navigate(&quot;name&quot;)</code> .</p>
+<blockquote>
+<p> <strong>Note:</strong> React Navigation provides two types of Stack Navigator API, we are using <a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/native-stack-navigator"><u>Native Stack</u></a> instead of <a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/stack-navigator/"><u>Stack</u></a>, because former uses native navigation primitives to provide better performance. If you want more customizability go with the latter.</p>
+</blockquote>
+<hr>
+
+<p><img src="https://cdn-images-1.medium.com/max/11520/1*U6wIPv2INeZyCCddrM8haQ.png" alt="Tab Navigation Illustration"></p>
+<p>Another commonly used navigation style is having tabs on the page and navigating to and fro. Tabs can be either on the top of the screen or bottom. React navigation comes with three different APIs for tabs:</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/bottom-tab-navigator"><u>Bottom Tabs</u></a> A simple tab bar on the bottom of the screen.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/material-bottom-tab-navigator"><u>Material Bottom Tabs</u></a> A material-design-themed tab bar on the bottom of the screen.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/material-top-tab-navigator"><u>Material Top Tabs</u></a> A material-design-themed tab bar on the top of the screen.</p>
+</li>
+</ul>
+<p>In this article, we are only going to look at Bottom Tabs to get an idea of how to use a tab navigator. Start with installing the required package for Bottom Tabs:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm install @react<span class="token operator">-</span>navigation<span class="token operator">/</span>bottom<span class="token operator">-</span>tabs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Just like Stack Navigation, we have to follow a structure as given in the sample code below. We have to initialize the navigator using <code>createBottomTabNavigator()</code> and then use it inside <code>NavigationContainer</code> as given in the example, all the tab screens go inside <code>Tab.Navigator</code>.</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Text <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Imports related to navigation</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>NavigationContainer<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createBottomTabNavigator <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/bottom-tabs'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Initialize the Tab navigator</span>
+<span class="token keyword">const</span> Tab <span class="token operator">=</span> <span class="token function">createBottomTabNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// We always surround navigator with NavigationContainer</span>
+<span class="token keyword">function</span> <span class="token function">TabsNavigation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>NavigationContainer<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Tab<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+        <span class="token punctuation">&#123;</span><span class="token comment">/* Add your tab components here */</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>Tab<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>NavigationContainer<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> TabsNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Let’s create simple components for our tabs, <code>Tab1</code> and <code>Tab2</code> each of which needs to be inside <code>&lt;Tab.Navigator&gt;</code> element. We need to create each tab with Tab.Screen and pass name and component in a similar fashion as done in the Stack example.</p>
+<blockquote>
+<p> You can also use <code>navigation.navigate()</code> method in a similar fashion as done in Stack Navigator.</p>
+</blockquote>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>Text<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>NavigationContainer<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>createBottomTabNavigator<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/bottom-tabs'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Our Tabs</span>
+<span class="token keyword">function</span> <span class="token function">Tab1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Text<span class="token operator">></span>Tab <span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">Tab2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token operator">&lt;</span>Text<span class="token operator">></span>Tab <span class="token number">2</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Initialize the Tab navigator</span>
+<span class="token keyword">const</span> Tab <span class="token operator">=</span> <span class="token function">createBottomTabNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// We always surround navigator with NavigationContainer</span>
+<span class="token keyword">function</span> <span class="token function">TabsNavigation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>NavigationContainer<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Tab<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+        <span class="token operator">&lt;</span>Tab<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Tab1"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Tab1<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>Tab<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Tab2"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Tab2<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>Tab<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>NavigationContainer<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> TabsNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Let’s see an animation of how our project looks with current code changes. Clicking on tab names on the button should change the rendered component as given in the animation below.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*pTYu0yUldnFtnj2kLITTMA.gif"></p>
+<blockquote>
+<p> You can also customize the icon of each Tab using <code>tabBarIcon</code> key on the options prop on each <code>Tab.Screen</code>,or by passing <code>tabBarIcon</code> to screenOptions on <code>Tab.Navigator</code>, to keep code example simple I leave that exploration up to you.</p>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/11520/1*x4ltoW9t277kXfZK_fGskQ.png" alt="Drawer Navigation"></p>
+<p><strong>Drawer</strong> can be said to be a special type of Tab where the buttons to change the tab live in a drawer on the left side (or right). To use a drawer in the project, start with installing the dependency.</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm install @react<span class="token operator">-</span>navigation<span class="token operator">/</span>drawer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Further, to complete the setup follow the instructions given <a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/drawer-navigator/#installation">here</a>. It is advised to run pod install inside ios folder after doing all the dependencies installation.</p>
+<p>Just like other navigators already discussed previously, Drawer also has a similar structure to be followed. We use <code>createDrawerNavigator()</code> to initialize the navigator and use it inside <code>&lt;NavigationContainer&gt;</code> as given in the code example below.</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Text <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Imports related to navigation</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>NavigationContainer<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>createDrawerNavigator<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/drawer'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Initialize the Drawer navigator</span>
+<span class="token keyword">const</span> Drawer <span class="token operator">=</span> <span class="token function">createDrawerNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// We always surround navigator with NavigationContainer</span>
+<span class="token keyword">function</span> <span class="token function">DrawerNavigation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>NavigationContainer<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Drawer<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+        <span class="token punctuation">&#123;</span><span class="token comment">/* Add your Drawer components here */</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>Drawer<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>NavigationContainer<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> DrawerNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>In a similar fashion, we will use Drawer.Navigator to place all our different screen&#x2F;Drawer components. Now let’s see a full-fledged drawer with three screens. Each screen will go with <code>Drawer.Screen</code> with <code>name</code> and <code>component</code> props. On each screen, we also have a link to navigate between them, or alternatively, we can use the drawer to change screens. Below given are the code and the output.</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
+<span class="token keyword">import</span> <span class="token string">'react-native-gesture-handler'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>Text<span class="token punctuation">,</span> Button<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>NavigationContainer<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>createDrawerNavigator<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@react-navigation/drawer'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Our Screens</span>
+<span class="token keyword">function</span> <span class="token function">Screen1</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span>navigation<span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>Text<span class="token operator">></span>Screen <span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Button
+        title<span class="token operator">=</span><span class="token string">"Go to Screen 2"</span>
+        onPress<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> navigation<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">'Screen2'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">Screen2</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span>navigation<span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>Text<span class="token operator">></span>Screen <span class="token number">2</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Button
+        title<span class="token operator">=</span><span class="token string">"Go to Screen 3"</span>
+        onPress<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> navigation<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">'Screen3'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">Screen3</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span>navigation<span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>Text<span class="token operator">></span>Screen <span class="token number">3</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Button
+        title<span class="token operator">=</span><span class="token string">"Go to Screen 1"</span>
+        onPress<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> navigation<span class="token punctuation">.</span><span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">'Screen1'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Initialize the Drawer navigator</span>
+<span class="token keyword">const</span> Drawer <span class="token operator">=</span> <span class="token function">createDrawerNavigator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">DrawerNavigation</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>NavigationContainer<span class="token operator">></span>
+        <span class="token operator">&lt;</span>Drawer<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+          <span class="token operator">&lt;</span>Drawer<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Screen1"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Screen1<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>Drawer<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Screen2"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Screen2<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>Drawer<span class="token punctuation">.</span>Screen name<span class="token operator">=</span><span class="token string">"Screen3"</span> component<span class="token operator">=</span><span class="token punctuation">&#123;</span>Screen3<span class="token punctuation">&#125;</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>Drawer<span class="token punctuation">.</span>Navigator<span class="token operator">></span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>NavigationContainer<span class="token operator">></span>
+      <span class="token operator">&lt;</span>NavigationContainer <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> DrawerNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*SJJnvGC9zoRBlDAHEw8kOA.gif" alt="Drawer Navigation Animation"></p>
+
+  <p><a class="classtest-link" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="classtest-link" href="/tags/Mobile-App-Development/" rel="tag">Mobile App Development</a>, <a class="classtest-link" href="/tags/React-Native/" rel="tag">React Native</a>, <a class="classtest-link" href="/tags/ReactJS/" rel="tag">ReactJS</a> — Sep 4, 2022</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/rahgurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://www.linkedin.com/in/rahgurung/" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/rahgurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/users/9514156/r-gurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svh-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

@@ -150,9 +150,11 @@ Since accessibility notifications are processed asynchronously, there’s a timi
 
 Since accessibility refocus or announcement issues happen because of UI element not being ready when we fire the notification. The fix is simply to introduce a delay before firing those notifications, this gives UIKit time to render the changes completely and then process the accessibility notifications.
 
+{% codeblock lang:swift %}
 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {  
     UIAccessibility.post(notification: .announcement, argument: "Update completed")  
 }
+{% endcodeblock %}
 
 > Conclusion
 

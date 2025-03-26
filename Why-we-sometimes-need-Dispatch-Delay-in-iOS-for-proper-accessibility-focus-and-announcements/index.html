@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Minima -->
+  <!-- Hexo theme created by @adisaktijrs -->
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+
+  
+  <title>Why we sometimes need Dispatch Delay in iOS for proper accessibility focus and announcements?</title>
+  
+  <link rel="canonical" href="https://rahulgurung.com/Why-we-sometimes-need-Dispatch-Delay-in-iOS-for-proper-accessibility-focus-and-announcements/">
+  
+  <meta name="description" content="In iOS development, if you want to make your app inclusive, creating an accessible experience for users with disabilities is a key priority. For users">
+  
+  
+  <meta name="keywords" content="JavaScript, ReactJS, VueJS, HTML, CSS, Walmart, Startup, Bootstrap, Funding">
+  
+  <meta name="author" content="Rahul Gurung">
+  
+  <meta property="og:image" content="https://rahulgurung.com/Why we sometimes need Dispatch Delay in iOS for proper accessibility focus and announcements?/header.png">
+  
+  <meta property="og:site_name" content="Rahul Gurung - A blog on modern Web, Startup, Hiking and everything in between." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Why we sometimes need Dispatch Delay in iOS for proper accessibility focus and announcements?" />
+  
+  <meta property="og:description" content="In iOS development, if you want to make your app inclusive, creating an accessible experience for users with disabilities is a key priority. For users">
+  
+  <meta property="og:url" content="https://rahulgurung.com/Why-we-sometimes-need-Dispatch-Delay-in-iOS-for-proper-accessibility-focus-and-announcements/" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why we sometimes need Dispatch Delay in iOS for proper accessibility focus and announcements?">
+  
+  <meta name="twitter:description" content="In iOS development, if you want to make your app inclusive, creating an accessible experience for users with disabilities is a key priority. For users">
+  
+  
+  <meta name="twitter:image" content="https://rahulgurung.com/Why we sometimes need Dispatch Delay in iOS for proper accessibility focus and announcements?/header.png">
+  
+  <meta name="twitter:url" content="https://rahulgurung.com/Why-we-sometimes-need-Dispatch-Delay-in-iOS-for-proper-accessibility-focus-and-announcements/" />
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preload fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="preload" href="../fonts/dm-serif-display-v4-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/inter-v2-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<link rel="stylesheet" href="/css/normalize.css">
+
+  
+<link rel="stylesheet" href="/css/skeleton.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+<link rel="stylesheet" href="/css/prism-dark.css">
+
+  
+<link rel="stylesheet" href="/css/prism-line-numbers.css">
+
+  <!-- User css -->
+  
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="/images/favicon.jpg">
+
+  <!-- Custom Theme Color Style
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <style>
+  a:not(.icon) {
+    /* text-decoration-color: #0FA0CE;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 50%,
+      #0FA0CE 50%
+    ); */
+    text-decoration: none;
+  }
+  blockquote {
+    border-left: 8px solid #0FA0CE;
+  }
+  .nanobar .bar {
+    background: #0FA0CE;
+  }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    background-color: #0FA0CE;
+    border-color: #0FA0CE;
+  }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #0FA0CE;
+  }
+</style>
+
+  <!-- Google Analytics (With Privacy Settings On)
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    /* Prepare GA Session, disable cookies to protect privacy */
+    ga("create", "UA-72221639-2", {storage: "none",});
+    /* Privacy settings - not tracking anything personal */
+    ga("set", "allowAdFeatures", false);
+    ga("set", "anonymizeIp", true);
+    ga("set", "forceSSL", true);
+    /* Send simple anonymized pageview */
+    ga("send", "pageview");
+  </script>
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div>
+
+        <!-- <div class="row">
+  <div class="two columns" style="max-width: 50px">
+    <h1 class="mt-2 mode">
+      <div onclick=setDarkMode(true) id="darkBtn">🌑</div>
+      <div onclick=setDarkMode(false) id="lightBtn" class=hidden>☀️</div>
+      <script >
+        if (localStorage.getItem('preferredTheme') == 'dark') {
+          setDarkMode(true)
+        }
+        function setDarkMode(isDark) {
+          var darkBtn = document.getElementById('darkBtn')
+          var lightBtn = document.getElementById('lightBtn')
+          if (isDark) {
+            lightBtn.style.display = "block"
+            darkBtn.style.display = "none"
+            localStorage.setItem('preferredTheme', 'dark');
+          } else {
+            lightBtn.style.display = "none"
+            darkBtn.style.display = "block"
+            localStorage.removeItem('preferredTheme');
+          }
+          document.body.classList.toggle("darkmode");
+        }
+      </script>
+    </h1>
+  </div> -->
+
+  <div class="mt-2 header">
+    <div class="author-title">
+      <a href="/">Rahul Gurung</a>
+    </div>
+    <span class="caret" onclick="openNav()">&#9776;</span>
+  </div>
+
+  <div class="twelve columns navbar">
+    <div class="row">
+      <div class="nine columns left">
+        
+          
+          <a href="/archives" class="mr-1 fw-light fs-18">Posts</a>
+          
+        
+          
+          <a href="/projects" class="mr-1 fw-light fs-18">Projects</a>
+          
+        
+          
+          <a href="/experience" class="mr-1 fw-light fs-18">Experience</a>
+          
+        
+          
+          <a target="_blank" rel="noopener" href="https://rahulgurung.substack.com" class="mr-1 fw-light fs-18">Newsletter</a>
+          
+        
+        
+          
+            <a href="mailto:hi@rahulgurung.com?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          
+        
+      </div>
+    </div>
+    <hr style="margin-bottom: 2.6rem">
+  </div>
+
+  <!-- Mobile Screen Navbar -->
+  <div class="sidenavbar" id="sidenavbar">
+    <div class="row">
+      <div class="sidenavbar__buttons">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+          
+          <a href="/archives" class="mr-1 fw-light fs-18">Posts</a>
+          
+        
+          
+          <a href="/projects" class="mr-1 fw-light fs-18">Projects</a>
+          
+        
+          
+          <a href="/experience" class="mr-1 fw-light fs-18">Experience</a>
+          
+        
+          
+          <a target="_blank" rel="noopener" href="https://rahulgurung.substack.com" class="mr-1 fw-light fs-18">Newsletter</a>
+          
+        
+        
+          
+            <a href="mailto:hi@rahulgurung.com?subject=Hello 👋!" target="_blank" class="mr-1 fw-light fs-18">Connect</a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openNav() {
+    document.getElementById("sidenavbar").style.width = "100%";
+  }
+
+  function closeNav() {
+    document.getElementById("sidenavbar").style.width = "0";
+  }
+</script>
+        <div class="trans">
+            <h2>Why we sometimes need Dispatch Delay in iOS for proper accessibility focus and announcements?</h2>
+
+  <p>In iOS development, if you want to make your app inclusive, creating an accessible experience for users with disabilities is a key priority. For users relying on assistive technologies like VoiceOver, it’s important to properly refocus on UI elements and ensure that important announcements are made. Refocusing allows users to navigate efficiently, while timely announcements ensure they receive critical information about changes in the app. One issue commonly faced by developers while working with such challenges is simply updating the layout or announcing text, does not always work as intended, sometimes. This can lead to missed or delayed notifications for users. In this article, we’ll discuss why such issues occur and how to properly handle focus and announcements for accessibility to ensure consistency. All the code used below is available in a <a target="_blank" rel="noopener" href="https://github.com/rahgurung/AccessibilityVoiceOverFocusIssues/"><u>nice Github repo</u></a> where you can fire the app on your mobile and run all working examples. While running these code, make sure you turn over Voiceover so that you can test the behaviors. I would suggest running these on real physical device as simulators are not really trustable for testing Voiceover behaviors.</p>
+<blockquote>
+<p>How to reproduce this issue?</p>
+</blockquote>
+<h4 id="Announcement-bug"><a href="#Announcement-bug" class="headerlink" title="Announcement bug"></a>Announcement bug</h4><p>Announcement bugs are more prevalent in an app. It is quite straightforward to reproduce. We can create one label and one button to reproduce the announcement issue. When this button is tapped, we will update the label’s text and announce <code>Text is updated</code> . Below is the code example for that:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">AnnouncementViewController</span><span class="token operator">:</span> UIViewController <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> label <span class="token operator">=</span> <span class="token function">UILabel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+    <span class="token keyword">let</span> actionButton <span class="token operator">=</span> <span class="token function">UIButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+  
+    override func <span class="token function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+        view<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token punctuation">.</span>white  
+  
+        <span class="token comment">// Set up label  </span>
+        label<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">"Old Text"</span>  
+        label<span class="token punctuation">.</span>textAlignment <span class="token operator">=</span> <span class="token punctuation">.</span>center  
+        label<span class="token punctuation">.</span>isAccessibilityElement <span class="token operator">=</span> <span class="token boolean">true</span>  
+        label<span class="token punctuation">.</span>accessibilityTraits <span class="token operator">=</span> <span class="token punctuation">.</span>staticText  
+  
+        <span class="token comment">// Set up button  </span>
+        actionButton<span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">"Tap Me"</span><span class="token punctuation">,</span> <span class="token keyword">for</span><span class="token operator">:</span> <span class="token punctuation">.</span>normal<span class="token punctuation">)</span>  
+        actionButton<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token punctuation">.</span>systemBlue  
+        actionButton<span class="token punctuation">.</span><span class="token function">setTitleColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>white<span class="token punctuation">,</span> <span class="token keyword">for</span><span class="token operator">:</span> <span class="token punctuation">.</span>normal<span class="token punctuation">)</span>  
+        actionButton<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>cornerRadius <span class="token operator">=</span> <span class="token number">8</span>  
+        actionButton<span class="token punctuation">.</span><span class="token function">addTarget</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token literal-property property">action</span><span class="token operator">:</span> <span class="token function">#selector</span><span class="token punctuation">(</span>buttonTapped<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">for</span><span class="token operator">:</span> <span class="token punctuation">.</span>touchUpInside<span class="token punctuation">)</span>  
+  
+        <span class="token comment">// Create a stack view for centering  </span>
+        <span class="token keyword">let</span> stackView <span class="token operator">=</span> <span class="token function">UIStackView</span><span class="token punctuation">(</span>arrangedSubviews<span class="token operator">:</span> <span class="token punctuation">[</span>label<span class="token punctuation">,</span> actionButton<span class="token punctuation">]</span><span class="token punctuation">)</span>  
+        stackView<span class="token punctuation">.</span>axis <span class="token operator">=</span> <span class="token punctuation">.</span>vertical  
+        stackView<span class="token punctuation">.</span>spacing <span class="token operator">=</span> <span class="token number">5</span>  
+        stackView<span class="token punctuation">.</span>alignment <span class="token operator">=</span> <span class="token punctuation">.</span>fill  
+        stackView<span class="token punctuation">.</span>distribution <span class="token operator">=</span> <span class="token punctuation">.</span>fill  
+        stackView<span class="token punctuation">.</span>translatesAutoresizingMaskIntoConstraints <span class="token operator">=</span> <span class="token boolean">false</span>  
+  
+        view<span class="token punctuation">.</span><span class="token function">addSubview</span><span class="token punctuation">(</span>stackView<span class="token punctuation">)</span>  
+  
+        <span class="token comment">// Center stack view  </span>
+        NSLayoutConstraint<span class="token punctuation">.</span><span class="token function">activate</span><span class="token punctuation">(</span><span class="token punctuation">[</span>  
+            stackView<span class="token punctuation">.</span>centerXAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalTo<span class="token operator">:</span> view<span class="token punctuation">.</span>centerXAnchor<span class="token punctuation">)</span><span class="token punctuation">,</span>  
+            stackView<span class="token punctuation">.</span>centerYAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalTo<span class="token operator">:</span> view<span class="token punctuation">.</span>centerYAnchor<span class="token punctuation">)</span><span class="token punctuation">,</span>  
+            stackView<span class="token punctuation">.</span>widthAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalToConstant<span class="token operator">:</span> <span class="token number">150</span><span class="token punctuation">)</span>  
+        <span class="token punctuation">]</span><span class="token punctuation">)</span>  
+  <span class="token punctuation">&#125;</span>  
+  
+  @objc func <span class="token function">buttonTapped</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  
+      label<span class="token punctuation">.</span>text <span class="token operator">=</span> <span class="token string">"Updated Text"</span>  
+        
+      <span class="token comment">// ❌ No announcement happens  </span>
+      UIAccessibility<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>notification<span class="token operator">:</span> <span class="token punctuation">.</span>announcement<span class="token punctuation">,</span> <span class="token literal-property property">argument</span><span class="token operator">:</span> <span class="token string">"Text is updated"</span><span class="token punctuation">)</span>  
+  <span class="token punctuation">&#125;</span>  
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>When you run the code, just swipe to the button and double tap to tap it. You will notice that there is no announcement called <code>Text is updated</code>.</p>
+<h4 id="Refocus-Bug"><a href="#Refocus-Bug" class="headerlink" title="Refocus Bug"></a>Refocus Bug</h4><p>Bugs related to refocus are found in more complex view controllers. These issues are not as prevalent as announcement bugs. Mostly these bugs happens because of code written by developers itself. For example, we might be using a component which gets created with an delay, i.e. due to animation and we quickly move focus to that component in next line while it might not be available there. Below given is a code example to reproduce the issue.</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">class</span> <span class="token class-name">RefocusViewController</span><span class="token punctuation">:</span> <span class="token class-name">UIViewController</span> <span class="token punctuation">&#123;</span>  
+    <span class="token keyword">let</span> actionButton <span class="token operator">=</span> <span class="token class-name">UIButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+  
+    <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function-definition function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  
+        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">viewDidLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        view<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token punctuation">.</span>white  
+        actionButton<span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Tap Me"</span></span><span class="token punctuation">,</span> <span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>normal<span class="token punctuation">)</span>  
+        actionButton<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token punctuation">.</span>systemBlue  
+        actionButton<span class="token punctuation">.</span><span class="token function">setTitleColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>white<span class="token punctuation">,</span> <span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>normal<span class="token punctuation">)</span>  
+        actionButton<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>cornerRadius <span class="token operator">=</span> <span class="token number">8</span>  
+        actionButton<span class="token punctuation">.</span><span class="token function">addTarget</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> action<span class="token punctuation">:</span> <span class="token other-directive property">#selector</span><span class="token punctuation">(</span>buttonTapped<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>touchUpInside<span class="token punctuation">)</span>  
+  
+        view<span class="token punctuation">.</span><span class="token function">addSubview</span><span class="token punctuation">(</span>actionButton<span class="token punctuation">)</span>  
+        actionButton<span class="token punctuation">.</span>translatesAutoresizingMaskIntoConstraints <span class="token operator">=</span> <span class="token boolean">false</span>  
+        <span class="token class-name">NSLayoutConstraint</span><span class="token punctuation">.</span><span class="token function">activate</span><span class="token punctuation">(</span><span class="token punctuation">[</span>  
+            actionButton<span class="token punctuation">.</span>centerXAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalTo<span class="token punctuation">:</span> view<span class="token punctuation">.</span>centerXAnchor<span class="token punctuation">)</span><span class="token punctuation">,</span>  
+            actionButton<span class="token punctuation">.</span>centerYAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalTo<span class="token punctuation">:</span> view<span class="token punctuation">.</span>centerYAnchor<span class="token punctuation">)</span><span class="token punctuation">,</span>  
+            actionButton<span class="token punctuation">.</span>widthAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalToConstant<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">)</span>  
+        <span class="token punctuation">]</span><span class="token punctuation">)</span>    
+    <span class="token punctuation">&#125;</span>
+  
+    <span class="token attribute atrule">@objc</span> <span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">buttonTapped</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  
+        <span class="token function">createButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+  
+        <span class="token comment">// ❌ Focus remains stuck on the "New Button"  </span>
+        <span class="token class-name">UIAccessibility</span><span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>notification<span class="token punctuation">:</span> <span class="token punctuation">.</span>layoutChanged<span class="token punctuation">,</span> argument<span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span>actionButton<span class="token punctuation">)</span>  
+    <span class="token punctuation">&#125;</span>  
+  
+    <span class="token comment">// Imagine this is some library method which you don't have access to  </span>
+    <span class="token comment">// This method creates a button with a delay and moves focus to that button  </span>
+    <span class="token keyword">func</span> <span class="token function-definition function">createButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  
+        <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">.</span><span class="token function">asyncAfter</span><span class="token punctuation">(</span>deadline<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">0.1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  
+            <span class="token comment">// Add a new focusable button (simulating a dynamic UI update)  </span>
+            <span class="token keyword">let</span> newButton <span class="token operator">=</span> <span class="token class-name">UIButton</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+            newButton<span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"New Button"</span></span><span class="token punctuation">,</span> <span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>normal<span class="token punctuation">)</span>  
+            newButton<span class="token punctuation">.</span>backgroundColor <span class="token operator">=</span> <span class="token punctuation">.</span>systemGreen  
+            newButton<span class="token punctuation">.</span><span class="token function">setTitleColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>white<span class="token punctuation">,</span> <span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>normal<span class="token punctuation">)</span>  
+            newButton<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>cornerRadius <span class="token operator">=</span> <span class="token number">8</span>  
+            <span class="token keyword">self</span><span class="token punctuation">.</span>view<span class="token punctuation">.</span><span class="token function">addSubview</span><span class="token punctuation">(</span>newButton<span class="token punctuation">)</span>  
+  
+            newButton<span class="token punctuation">.</span>translatesAutoresizingMaskIntoConstraints <span class="token operator">=</span> <span class="token boolean">false</span>  
+            <span class="token class-name">NSLayoutConstraint</span><span class="token punctuation">.</span><span class="token function">activate</span><span class="token punctuation">(</span><span class="token punctuation">[</span>  
+                newButton<span class="token punctuation">.</span>centerXAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalTo<span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span>view<span class="token punctuation">.</span>centerXAnchor<span class="token punctuation">)</span><span class="token punctuation">,</span>  
+                newButton<span class="token punctuation">.</span>topAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalTo<span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">.</span>actionButton<span class="token punctuation">.</span>bottomAnchor<span class="token punctuation">,</span> constant<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  
+                newButton<span class="token punctuation">.</span>widthAnchor<span class="token punctuation">.</span><span class="token function">constraint</span><span class="token punctuation">(</span>equalToConstant<span class="token punctuation">:</span> <span class="token number">150</span><span class="token punctuation">)</span>  
+            <span class="token punctuation">]</span><span class="token punctuation">)</span>  
+            <span class="token class-name">UIAccessibility</span><span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>notification<span class="token punctuation">:</span> <span class="token punctuation">.</span>layoutChanged<span class="token punctuation">,</span> argument<span class="token punctuation">:</span> newButton<span class="token punctuation">)</span>  
+        <span class="token punctuation">&#125;</span>  
+    <span class="token punctuation">&#125;</span>  
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>In the above example, we create a button which creates another button on tap. This button creation happens after a slight delay, and it moves focus to the newly created button. We do refocus on the <code>actionButton</code> itself in <code>buttonTapped</code> method but it doesn’t work.</p>
+<blockquote>
+<p>Why it happens?</p>
+</blockquote>
+<p>When we post an accessibility notification (for focus change or announcements), iOS processes it based on the current accessibility hierarchy — the internal representation of UI elements that VoiceOver uses. However, if the UI is in the middle of an update (e.g., a new element is being added, a layout is changing, or a label’s text is modified), the accessibility tree may not have fully reflected these changes yet.</p>
+<p>Since accessibility notifications are processed asynchronously, there’s a timing mismatch: the notification is sent while iOS still sees the old state of the UI. As a result:</p>
+<ul>
+<li>For <strong>focus changes</strong>, VoiceOver may attempt to move focus to an element that doesn’t yet exist in the accessibility tree, causing focus to remain stuck or move unpredictably.</li>
+<li>For <strong>announcements</strong>, if a label’s text has changed but the update hasn’t been registered in the accessibility tree, VoiceOver may ignore the announcement entirely, thinking it’s redundant.</li>
+</ul>
+<h4 id="Thus-mismatch-between-when-we-trigger-the-notification-and-when-iOS-fully-registers-UI-updates-is-the-root-cause-of-the-issue"><a href="#Thus-mismatch-between-when-we-trigger-the-notification-and-when-iOS-fully-registers-UI-updates-is-the-root-cause-of-the-issue" class="headerlink" title="Thus, mismatch between when we trigger the notification and when iOS fully registers UI updates is the root cause of the issue."></a>Thus, mismatch between when we trigger the notification and when iOS fully registers UI updates is the root cause of the issue.</h4><blockquote>
+<p>How to fix it?</p>
+</blockquote>
+<p>Since accessibility refocus or announcement issues happen because of UI element not being ready when we fire the notification. The fix is simply to introduce a delay before firing those notifications, this gives UIKit time to render the changes completely and then process the accessibility notifications.</p>
+<p>DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {<br>    UIAccessibility.post(notification: .announcement, argument: “Update completed”)<br>}</p>
+<blockquote>
+<p>Conclusion</p>
+</blockquote>
+<p>Accessibility notifications in iOS are processed asynchronously, which can sometimes lead to announcements being ignored or focus changes not working as expected. This happens because the UI might not be fully updated when the notification is posted. By introducing slight delays and ensuring that elements are properly recognized before posting notifications, we can make VoiceOver interactions more reliable. Understanding these nuances helps create a smoother and more accessible experience for all users.</p>
+
+  <p><a class="classtest-link" href="/tags/Accessibility/" rel="tag">Accessibility</a>, <a class="classtest-link" href="/tags/Swift/" rel="tag">Swift</a>, <a class="classtest-link" href="/tags/UIKit/" rel="tag">UIKit</a>, <a class="classtest-link" href="/tags/iOS/" rel="tag">iOS</a> — Mar 27, 2025</p>
+  
+
+
+          <div class="row mt-2">
+  
+    <div class="eight columns">
+      <p id="madewith">Made with ❤
+        
+        at <a href="https://en.wikipedia.org/wiki/Earth" target="_blank" rel="noreferrer">Earth</a>.</p>
+        
+    </div>
+
+    <!-- Sepcial thanks to https://simpleicons.org/ for the icons -->
+    <div class="four columns mb-3 posisi" >
+      
+      <a class="ml-0 footer-link icon" href="https://github.com/rahgurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="GitHub">
+        <svg class="github svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://www.linkedin.com/in/rahgurung/" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="LinkedIn">
+        <svg class="linkedin svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://twitter.com/rahgurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="Twitter">
+        <svg class="twitter svg-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Twitter</title><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+      </a>
+      
+
+      
+
+      
+      <a class="ml-0 footer-link icon" href="https://stackoverflow.com/users/9514156/r-gurung" target="_blank" style="text-decoration: none" rel="noreferrer" aria-label="StackOverflow">
+        <svg class="stackoverflow svh-hov" width="18" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stack Overflow</title><path d="M15.725 0l-1.72 1.277 6.39 8.588 1.716-1.277L15.725 0zm-3.94 3.418l-1.369 1.644 8.225 6.85 1.369-1.644-8.225-6.85zm-3.15 4.465l-.905 1.94 9.702 4.517.904-1.94-9.701-4.517zm-1.85 4.86l-.44 2.093 10.473 2.201.44-2.092-10.473-2.203zM1.89 15.47V24h19.19v-8.53h-2.133v6.397H4.021v-6.396H1.89zm4.265 2.133v2.13h10.66v-2.13H6.154Z"/></svg>
+      </a>
+      
+
+    </div>
+  
+</div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="/js/nanobar.min.js"></script>
+  <script>
+    var options = {
+      classname: 'nanobar',
+      id: 'myNanobar'
+    };
+    var nanobar = new Nanobar(options);
+    nanobar.go(30);
+    nanobar.go(76);
+    nanobar.go(100);
+  </script>
+
+</body>
+
+</html>

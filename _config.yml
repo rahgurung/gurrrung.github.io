@@ -50,6 +50,7 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+syntax_highlighter: 'prismjs'
 prismjs:
   enable: true
   preprocess: true

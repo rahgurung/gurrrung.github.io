@@ -3,6 +3,7 @@ title: How to download Coursera videos in HD?
 readtime: 1
 date: 2020-06-12 17:45:55
 description: Trick to download Coursera videos in HD with a bonus tool to automate it.
+thumbnail: /How-to-download-Coursera-videos-in-HD/header.png
 tags: Chrome Extension
 ---
 Hey, In this article I’m going to reveal ways to download Coursera videos in HD.  

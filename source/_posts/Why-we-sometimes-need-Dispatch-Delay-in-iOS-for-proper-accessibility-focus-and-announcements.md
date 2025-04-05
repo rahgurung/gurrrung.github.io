@@ -4,8 +4,7 @@ title: >-
   announcements?
 readtime: 10
 thumbnail: >-
-  /Why we sometimes need Dispatch Delay in iOS for proper accessibility focus
-  and announcements?/header.png
+  /Why-we-sometimes-need-Dispatch-Delay-in-iOS-for-proper-accessibility-focus-and-announcements/header.png
 date: 2025-03-27 23:55:58
 description: This article explains why Dispatch Delay is sometimes necessary in iOS to ensure proper VoiceOver focus and announcements. It covers common accessibility issues, how timing affects VoiceOver behavior, and when delaying updates can improve the user experience.
 tags:

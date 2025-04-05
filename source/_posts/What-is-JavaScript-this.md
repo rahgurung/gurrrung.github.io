@@ -2,6 +2,7 @@
 title: What is JavaScript `this`?
 readtime: 10
 date: 2021-12-06 22:05:12
+thumbnail: /What-is-JavaScript-this/header.png
 description: An layman language article explaining JavaScript's `this`.
 tags:
  - JavaScript

@@ -1,5 +1,5 @@
 ---
-title: Testing
+title: Introduction to React Native Navigation
 readtime: 25
 thumbnail: /Introduction-to-React-Native-Navigation/header.png
 date: 2022-09-04 12:27:50

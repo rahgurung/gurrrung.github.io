@@ -265,7 +265,8 @@
 <li><p><a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/getting-started"><u>React Navigation Setup</u></a></p>
 </li>
 </ul>
-<p><img src="https://cdn-images-1.medium.com/max/11520/1*FWsrWa7lzMLb6OBWaryBCg.png" alt="Stack Navigation Illustration"></p>
+<img src="/Introduction-to-React-Native-Navigation/stack_navigation_illustration.png" class="" title="Stack Navigation Illustration" alt="Stack Navigation Illustration">
+
 <p><em><strong>Stack Navigation</strong></em> In this kind of navigation, a stack of screens is maintained. Each time we visit a screen, it is pushed to the stack, and pressing back will pop the item from the stack and show the last screen. A good example of this type of navigation is web pages where we navigate between different pages of a site and press back to move to the last page. Before we proceed, we need to add the library needed for Stack navigation.</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm install @react<span class="token operator">-</span>navigation<span class="token operator">/</span>native<span class="token operator">-</span>stack<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -328,7 +329,8 @@
 <span class="token keyword">export</span> <span class="token keyword">default</span> StackNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>The application right now looks like the image given below where we see our default screen (Screen1) and currently there is no way to navigate to Screen2. We will talk about how to do that in the below section.</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*OcoxK8WUzTNNgIcIUINhGA.png" alt="Screen1 is visible as the default screen"></p>
+<img src="/Introduction-to-React-Native-Navigation/screen1-visible-as-default-screen.png" class="" title="Screen1 is visible as the default screen" alt="Screen1 is visible as the default screen">
+
 <h3 id="How-we-can-travel-between-screens"><a href="#How-we-can-travel-between-screens" class="headerlink" title="How we can travel between screens?"></a>How we can travel between screens?</h3><p>Now that we have two screens in our application. Let’s see how we can move between these screens or we can say how we can push new screens to the stack. React Navigation comes with a method to achieve this called <code>navigate()</code> which is available in the navigation prop, this prop is added automatically for each screen. In <code>navigate()</code> method, we just need to pass the name of the screen we want to navigate to. This name is the same name that we set in the previous section. Let’s see a code example, where we have a button in Screen1 to navigate to Screen2 and a button in the latter to navigate to the former.</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
 <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
@@ -377,14 +379,16 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> StackNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*LB6XfE_-FWER27br3sJgJA.gif" alt="Animation of navigation between screens"></p>
+<img src="/Introduction-to-React-Native-Navigation/navigation-animation.gif" class="" title="Animation of navigation between screens" alt="Animation of navigation between screens">
+
 <p>You can see that clicking on Go to Screen 2 takes us to <code>Screen2</code> and further, there is a back button available in the upper left section in <code>Screen2</code> to go back. Go to Screen 1 button in <code>Screen2</code> takes us back to Screen1 and behaves the same as pressing the back button, this is being handled by React Navigation Library. Instead of pushing new <code>Screen1</code> to stack, it is looking back in the history of the stack to navigate to the required page if found. Further in a similar fashion, if the page to navigate to is in the stack already, it will keep popping the stack until it reaches that page. If your requirement is to create new screens and push to stack instead of looking back in the history stack, use <code>navigation.push(&quot;name&quot;)</code> instead of <code>navigation.navigate(&quot;name&quot;)</code> .</p>
 <blockquote>
 <p> <strong>Note:</strong> React Navigation provides two types of Stack Navigator API, we are using <a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/native-stack-navigator"><u>Native Stack</u></a> instead of <a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/stack-navigator/"><u>Stack</u></a>, because former uses native navigation primitives to provide better performance. If you want more customizability go with the latter.</p>
 </blockquote>
 <hr>
 
-<p><img src="https://cdn-images-1.medium.com/max/11520/1*U6wIPv2INeZyCCddrM8haQ.png" alt="Tab Navigation Illustration"></p>
+<img src="/Introduction-to-React-Native-Navigation/Tab-Navigation-Illustration.png" class="" title="Tab Navigation Illustration" alt="Tab Navigation Illustration">
+
 <p>Another commonly used navigation style is having tabs on the page and navigating to and fro. Tabs can be either on the top of the screen or bottom. React navigation comes with three different APIs for tabs:</p>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/bottom-tab-navigator"><u>Bottom Tabs</u></a> A simple tab bar on the bottom of the screen.</p>
@@ -459,11 +463,13 @@
 <span class="token keyword">export</span> <span class="token keyword">default</span> TabsNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Let’s see an animation of how our project looks with current code changes. Clicking on tab names on the button should change the rendered component as given in the animation below.</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*pTYu0yUldnFtnj2kLITTMA.gif"></p>
+<img src="/Introduction-to-React-Native-Navigation/tab-change-animation.gif" class="" title="Animation of tab change" alt="Animation of tab change">
+
 <blockquote>
 <p> You can also customize the icon of each Tab using <code>tabBarIcon</code> key on the options prop on each <code>Tab.Screen</code>,or by passing <code>tabBarIcon</code> to screenOptions on <code>Tab.Navigator</code>, to keep code example simple I leave that exploration up to you.</p>
 </blockquote>
-<p><img src="https://cdn-images-1.medium.com/max/11520/1*x4ltoW9t277kXfZK_fGskQ.png" alt="Drawer Navigation"></p>
+<img src="/Introduction-to-React-Native-Navigation/drawer-navigation-illustation.png" class="" title="Drawer Navigation" alt="Drawer Navigation">
+
 <p><strong>Drawer</strong> can be said to be a special type of Tab where the buttons to change the tab live in a drawer on the left side (or right). To use a drawer in the project, start with installing the dependency.</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">npm install @react<span class="token operator">-</span>navigation<span class="token operator">/</span>drawer<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Further, to complete the setup follow the instructions given <a target="_blank" rel="noopener" href="https://reactnavigation.org/docs/drawer-navigator/#installation">here</a>. It is advised to run pod install inside ios folder after doing all the dependencies installation.</p>
@@ -556,7 +562,7 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> DrawerNavigation<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*SJJnvGC9zoRBlDAHEw8kOA.gif" alt="Drawer Navigation Animation"></p>
+<img src="/Introduction-to-React-Native-Navigation/drawer-navigation-animation.gif" class="" title="Drawer Navigation animation" alt="Drawer Navigation animation">
 
   <p><a class="classtest-link" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="classtest-link" href="/tags/Mobile-App-Development/" rel="tag">Mobile App Development</a>, <a class="classtest-link" href="/tags/React-Native/" rel="tag">React Native</a>, <a class="classtest-link" href="/tags/ReactJS/" rel="tag">ReactJS</a> — Sep 4, 2022</p>
   

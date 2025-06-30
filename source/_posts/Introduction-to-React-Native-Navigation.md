@@ -23,7 +23,7 @@ In this article, we are going to learn how we can implement navigation in React 
 
 * [<u>React Navigation Setup</u>](https://reactnavigation.org/docs/getting-started)
 
-![Stack Navigation Illustration](https://cdn-images-1.medium.com/max/11520/1*FWsrWa7lzMLb6OBWaryBCg.png)
+{% asset_img stack_navigation_illustration.png "Stack Navigation Illustration'Stack Navigation Illustration'" %}
 
 ***Stack Navigation*** In this kind of navigation, a stack of screens is maintained. Each time we visit a screen, it is pushed to the stack, and pressing back will pop the item from the stack and show the last screen. A good example of this type of navigation is web pages where we navigate between different pages of a site and press back to move to the last page. Before we proceed, we need to add the library needed for Stack navigation.
 
@@ -97,7 +97,7 @@ export default StackNavigation;
 
 The application right now looks like the image given below where we see our default screen (Screen1) and currently there is no way to navigate to Screen2. We will talk about how to do that in the below section.
 
-![Screen1 is visible as the default screen](https://cdn-images-1.medium.com/max/2000/1*OcoxK8WUzTNNgIcIUINhGA.png)
+{% asset_img screen1-visible-as-default-screen.png "Screen1 is visible as the default screen'Screen1 is visible as the default screen'" %}
 
 ### How we can travel between screens?
 
@@ -152,14 +152,14 @@ function StackNavigation() {
 export default StackNavigation;
 {% endcodeblock %}
 
-![Animation of navigation between screens](https://cdn-images-1.medium.com/max/2000/1*LB6XfE_-FWER27br3sJgJA.gif)
+{% asset_img navigation-animation.gif "Animation of navigation between screens'Animation of navigation between screens'" %}
 
 You can see that clicking on Go to Screen 2 takes us to `Screen2` and further, there is a back button available in the upper left section in `Screen2` to go back. Go to Screen 1 button in `Screen2` takes us back to Screen1 and behaves the same as pressing the back button, this is being handled by React Navigation Library. Instead of pushing new `Screen1` to stack, it is looking back in the history of the stack to navigate to the required page if found. Further in a similar fashion, if the page to navigate to is in the stack already, it will keep popping the stack until it reaches that page. If your requirement is to create new screens and push to stack instead of looking back in the history stack, use `navigation.push("name")` instead of `navigation.navigate("name")` .
 
 >  **Note:** React Navigation provides two types of Stack Navigator API, we are using [<u>Native Stack</u>](https://reactnavigation.org/docs/native-stack-navigator) instead of [<u>Stack</u>](https://reactnavigation.org/docs/stack-navigator/), because former uses native navigation primitives to provide better performance. If you want more customizability go with the latter.
 <hr>
 
-![Tab Navigation Illustration](https://cdn-images-1.medium.com/max/11520/1*U6wIPv2INeZyCCddrM8haQ.png)
+{% asset_img Tab-Navigation-Illustration.png "Tab Navigation Illustration'Tab Navigation Illustration'" %}
 
 Another commonly used navigation style is having tabs on the page and navigating to and fro. Tabs can be either on the top of the screen or bottom. React navigation comes with three different APIs for tabs:
 
@@ -242,10 +242,11 @@ Let’s create simple components for our tabs, `Tab1` and `Tab2` each of which n
 
 Let’s see an animation of how our project looks with current code changes. Clicking on tab names on the button should change the rendered component as given in the animation below.
 
-![](https://cdn-images-1.medium.com/max/2000/1*pTYu0yUldnFtnj2kLITTMA.gif)
+{% asset_img tab-change-animation.gif "Animation of tab change'Animation of tab change'" %}
+
 >  You can also customize the icon of each Tab using `tabBarIcon` key on the options prop on each `Tab.Screen`,or by passing `tabBarIcon` to screenOptions on `Tab.Navigator`, to keep code example simple I leave that exploration up to you.
 
-![Drawer Navigation](https://cdn-images-1.medium.com/max/11520/1*x4ltoW9t277kXfZK_fGskQ.png)
+{% asset_img drawer-navigation-illustation.png "Drawer Navigation'Drawer Navigation'" %}
 
 **Drawer** can be said to be a special type of Tab where the buttons to change the tab live in a drawer on the left side (or right). To use a drawer in the project, start with installing the dependency.
 {% codeblock lang:js %}
@@ -348,5 +349,4 @@ In a similar fashion, we will use Drawer.Navigator to place all our different sc
   export default DrawerNavigation;
 {% endcodeblock %}
 
-![Drawer Navigation Animation](https://cdn-images-1.medium.com/max/2000/1*SJJnvGC9zoRBlDAHEw8kOA.gif)
-
+{% asset_img drawer-navigation-animation.gif "Drawer Navigation animation'Drawer Navigation animation'" %}

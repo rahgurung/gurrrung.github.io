@@ -512,6 +512,20 @@ body.darkmode {
   max-width: none;
 }
 
+
+.badge-launching {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: "Inter", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
 .experience__container {
   display: flex;
   flex-wrap: wrap;
